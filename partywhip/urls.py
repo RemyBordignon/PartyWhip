@@ -14,12 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.contrib.auth.views import LogoutView, LoginView
+from django.urls import path, include, re_path
 
 from partywhip import views
 
 urlpatterns = [
-    path('', views.welcome),
+    path('', views.welcome, name="welcome"),
     path('admin/', admin.site.urls),
     path('boards/', include('boards.urls')),
+    re_path('login$', LoginView.as_view(template_name="partywhip/login_form.html"), name="login"),
+    re_path('logout$', LogoutView.as_view(), name="logout"),
 ]

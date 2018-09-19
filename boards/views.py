@@ -16,17 +16,19 @@ def index(request):
     }
     return render(request, 'boards/index.html', context)
 
-
+@login_required
 def detail(request, question_id):
     post = get_object_or_404(Post, pk=question_id)
     return render(request, 'boards/detail.html', {'post': post})
 
 
+@login_required
 def results(request, question_id):
     response = "You're looking at the results of question %s."
     return HttpResponse(response % question_id)
 
 
+@login_required
 def create_post(request):
     if request.method == "POST":
         # use this to add users to DB TABLE TODO

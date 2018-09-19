@@ -126,3 +126,7 @@ STATICFILES_DIRS = [
 ]
 
 CRISPY_TEMPLATE_PACK='bootstrap3'
+
+LOGIN_REDIRECT_URL = "boards:index"
+LOGIN_URL = "login"
+LOGOUT_REDIRECT_URL = "welcome"
