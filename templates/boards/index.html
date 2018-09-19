@@ -1,0 +1,24 @@
+{% extends "../base.html" %}
+
+{% block title %}
+Posts
+{% endblock %}
+
+{% block content %}
+
+{% if post_list  %}
+    <h2>Job Postings:</h2>
+    <ul>
+        {% for post in post_list %}
+            <li><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No Questions available</p>
+{% endif %}
+
+    <a href="{% url 'boards:create_post' %}">
+        Create a new post
+    </a>
+
+{% endblock %}

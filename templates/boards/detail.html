@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>{{ post.title }}</h1>
+            <h3>Current bids: </h3>
+            <ul>
+                {% for bid in post.bid_set.all %}
+                    <li>{{ bid.bidder_name }} : {{ bid.price }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
