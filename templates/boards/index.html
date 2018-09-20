@@ -17,8 +17,12 @@ Posts
     <p>No Questions available</p>
 {% endif %}
 
-    <button class="btn-block" href="{% url 'boards:create_post' %}">
-        Create a new post
-    </button>
+    <a href="{% url 'boards:create_post' %}">
+        <button class="btn btn-success">Create Post</button>
+    </a>
+
+    <a href="{% url 'boards:create_bid' %}">
+        <button class="btn btn-success">Create Bid</button>
+    </a>
 
 {% endblock %}

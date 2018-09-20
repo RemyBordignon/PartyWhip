@@ -6,14 +6,14 @@
 
 {% block content %}
     <div class="jumbotron">
-        <div class="container">
             <h1>{{ post.title }}</h1>
             <h3>Current bids: </h3>
             <ul>
                 {% for bid in post.bid_set.all %}
-                    <li>{{ bid.bidder_name }} : {{ bid.price }}</li>
+                    <div class="list-group-item-text">
+                        <li>{{ bid.bidder_name }} : {{ bid.price }}</li>
+                    </div>
                 {% endfor %}
             </ul>
-        </div>
     </div>
 {% endblock %}

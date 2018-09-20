@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
-from boards.forms import PostForm
+from boards.forms import PostForm, BidForm
 from boards.models import Post
 
 
@@ -16,16 +16,11 @@ def index(request):
     }
     return render(request, 'boards/index.html', context)
 
+
 @login_required
 def detail(request, question_id):
     post = get_object_or_404(Post, pk=question_id)
     return render(request, 'boards/detail.html', {'post': post})
-
-
-@login_required
-def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
 
 
 @login_required
@@ -41,3 +36,15 @@ def create_post(request):
     else:
         form = PostForm()
     return render(request, "boards/new_post_form.html", {'form': form})
+
+
+@login_required
+def create_bid(request):
+    if request.method == "POST":
+        form = BidForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('boards:index')
+    else:
+        form = BidForm()
+    return render(request, "boards/new_bid_form.html", {'form': form})
