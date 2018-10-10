@@ -10,6 +10,7 @@ class Post(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
+        default=1
     )
 
     # Fields
@@ -28,7 +29,7 @@ class Post(models.Model):
     def bidding_open(self):
         # STUB FOR NOW
         # return time.now() < end_date
-        return True;
+        return True
 
     def __str__(self):
         return self.title
@@ -38,6 +39,7 @@ class Bid(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
+        default=1
     )
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     price = models.IntegerField()

@@ -1,7 +1,7 @@
 {% extends "../base.html" %}
 
 {% block title %}
-Posts for {{ post.user }}
+Posts for {{ request.user.username }}
 {% endblock %}
 
 {% block content %}
