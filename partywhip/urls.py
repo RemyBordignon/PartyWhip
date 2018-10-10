@@ -23,6 +23,7 @@ urlpatterns = [
     path('', views.welcome, name="welcome"),
     path('admin/', admin.site.urls),
     path('boards/', include('boards.urls')),
-    re_path('login$', LoginView.as_view(template_name="partywhip/login_form.html"), name="login"),
-    re_path('logout$', LogoutView.as_view(), name="logout"),
+    path('signup/', views.signup, name='signup'),
+    path('login/', LoginView.as_view(template_name="partywhip/login_form.html"), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]
