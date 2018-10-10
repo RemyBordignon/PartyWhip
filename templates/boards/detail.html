@@ -6,14 +6,39 @@
 
 {% block content %}
     <div class="jumbotron">
-            <h1>{{ post.title }}</h1>
-            <h3>Current bids: </h3>
-            <ul>
-                {% for bid in post.bid_set.all %}
-                    <div class="list-group-item-text">
-                        <li>{{ bid.bidder_name }} : {{ bid.price }}</li>
-                    </div>
-                {% endfor %}
-            </ul>
+        <h1 align="center">{{ post.title }}</h1>
+        <h4 align="center">Closing Date: </h4>
+        <br>
+        <h3><i id="icon" class="far fa-calendar-alt"></i> Event Date: </h3>
+        <h3><i id="icon" class="fas fa-map-marker-alt"></i> Location: </h3>
+        <h3><i id="icon" class="fas fa-dollar-sign"></i> Budget: </h3>
+        <br>
+        <h3>Description: </h3>
+        <div id="description"> i need someone to cook please </div>
+    </div>
+    <div class="jumbotron">
+        <h2>Current bids: </h2>
+        <ul>
+            {% for bid in post.bid_set.all %}
+
+                <div id="bids">
+                    <h3 id>{{ bid.bidder_name }} &nbsp &nbsp
+                        <small id="bidder-price" class="text-muted">Price: ${{ bid.price }}</small>
+                    </h3>
+                    <h3>Contact Details: </h3>
+                    <div id="description">helllooo</div>
+
+
+
+
+    {#                <div class="list-group-item-text">#}
+    {#                    <li>{{ bid.bidder_name }} : {{ bid.price }}</li>#}
+    {#                </div>#}
+                </div>
+                <br>
+            {% endfor %}
+
+
+        </ul>
     </div>
 {% endblock %}

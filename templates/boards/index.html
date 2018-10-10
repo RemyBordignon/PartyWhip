@@ -1,16 +1,35 @@
 {% extends "../base.html" %}
 
 {% block title %}
-Posts
+Dashboard
 {% endblock %}
 
 {% block content %}
+
+<!-- Search bar -->
+<div class="md-form">
+    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+</div>
 
 {% if post_list  %}
     <h2>Job Postings:</h2>
     <ul>
         {% for post in post_list %}
-            <div class="list-group-item"><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></div>
+            <!-- <div class="list-group-item"><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></div> -->
+            <!-- <ul class="list-group row">
+                 <li class="list-group-item col-xs-6"><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></li>
+                 <li class="list-group-item col-xs-6"><a href="{% url 'boards:detail' post.id %}">{{ post.event_date }}</a></li>
+                 <li class="list-group-item col-xs-6"><a href="{% url 'boards:detail' post.id %}">{{ post.budget }}</a></li>
+                 <li class="list-group-item col-xs-6"><a href="{% url 'boards:detail' post.id %}">{{ post.location }}</a></li>
+             </ul> -->
+             <div class="container">
+                  <div class="row">
+                    <div class="col-md-3"><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></div>
+                    <div class="col-md-3"><h2>Column 1</h2></div>
+                    <div class="col-md-3"><h2>Column 2</h2></div>
+                    <div class="col-md-3"><h2>Column 3</h2></div>
+                  </div>
+            </div>
         {% endfor %}
     </ul>
 {% else %}
