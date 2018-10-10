@@ -12,11 +12,13 @@ My Bids
     {% for bid in bid_list %}
     <div class="card mt-3 mb-3">
         <div class="card-header">
-            {{bid.post.title}}
+            <strong>{{bid.post.title}}</strong>
         </div>
         <div class="card-body">
             <p class="card-text">{{bid.post.comment}}</p>
-            <a href="{% url 'boards:detail' bid.post.id %}" class="btn btn-primary">Details</a>
+            <p class="card-text"><i id="icon" class="far fa-calendar-alt"></i> {{bid.post.event_date}}</p>
+            <p class="card-text"><i id="icon" class="fas fa-map-marker-alt"></i> {{bid.post.location}}</p>
+            <a href="{% url 'boards:detail' bid.post.id %}" class="btn btn-success">Details</a>
         </div>
     </div>
     {% endfor %}
