@@ -11,41 +11,48 @@
         </div>
     {% endif %}
     <div class="jumbotron">
-        <h1 align="center">{{ post.title }}</h1>
-        <h4 align="center">Closing Date: {{ post.end_date }}</h4>
-        <br>
-        <h3><i id="icon" class="far fa-calendar-alt"></i> &nbsp{{ post.event_date }}</h3>
-        <h3><i id="icon" class="fas fa-map-marker-alt"></i> &nbsp{{ post.location }}</h3>
-        <h3><i id="icon" class="fas fa-dollar-sign"></i> &nbsp{{ post.budget }}</h3>
-        <br>
-        <h3>Description </h3>
-        <div id="description"> {{ post.comment }} </div>
+    <h1 id="post-title" align="center">{{ post.title }}</h1>
+    <h4 align="center">Closing Date: {{ post.end_date }}</h4>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10">
+                    <h3><i id="icon" class="far fa-calendar-alt"></i> &nbsp{{ post.event_date }}</h3>
+                    <h3><i id="icon" class="fas fa-map-marker-alt"></i> &nbsp{{ post.location }}</h3>
+                    <br>
+                    <h4>Details </h4>
+                    <div id="description"> {{ post.comment }} </div>
+                </div>
+                <div id="budget-box" class="col-sm-2">
+                    <h4 align="center">Budget</h4>
+                    <h3 id="budget" align="center">${{ post.budget }}</h3>
+                    <a href="{% url 'boards:create_bid' %}">
+                        <button class="btn btn-dark btn-lg btn-block">Create Bid</button>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
+
     <div class="jumbotron">
-        <h2>Current bids: </h2>
+        <h3>CURRENT BIDS</h3>
         <ul>
             {% for bid in post.bid_set.all %}
 
                 <div id="bids">
-                    <h3 id>{{ bid.user.username }} &nbsp &nbsp
+                    <h3 id>{{ bid.user.username }} &nbsp
                         <small id="bidder-price" class="text-muted">Price: ${{ bid.price }}</small>
                     </h3>
-                    <h3>Contact Details </h3>
+                    <br>
+                    <h4>Contact Details </h4>
                     <div id="description">{{ bid.contact_details }}</div>
-                    <h3>Comments</h3>
+                    <h4>Comments</h4>
                     <div id="description">{{ bid.comment }}</div>
-
-
-
-
-    {#                <div class="list-group-item-text">#}
-    {#                    <li>{{ bid.bidder_name }} : {{ bid.price }}</li>#}
-    {#                </div>#}
                 </div>
                 <br>
             {% endfor %}
 
 
         </ul>
+
     </div>
 {% endblock %}

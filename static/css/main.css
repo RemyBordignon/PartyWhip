@@ -4,10 +4,15 @@
    Author's custom styles
    ========================================================================== */
 
+html * {
+    font-family: "Verdana";
+
+}
+
 #description {
     margin-right: 20px;
-    background-color: #F9DFF7;
-    font-size: 15px;
+    background-color: #E9F8FF;
+    font-size: 13px;
     padding: 10px;
     border-radius: 15px;
 
@@ -28,7 +33,7 @@ hr {
 
 #bids {
     margin-right: 20px;
-    background-color: whitesmoke;
+    background-color: #F6F6F6;
     padding: 10px;
     border-radius: 15px;
 }
@@ -36,6 +41,35 @@ hr {
 alert alert-primary {
     background-color: red
 }
+
+#post-title {
+    font-weight: bold;
+    color: #4C9B4A;
+}
+
+jumbotron {
+    background-color: #f1f1f1;
+}
+
+#budget-box {
+    font-size: 15px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1.5px;
+    padding-bottom: 25px;
+    padding-top: 15px;
+    background-color: #F6F6F6;
+}
+
+#budget {
+    font-size: 45px;
+}
+
+#bid-button {
+    background-color: #f2f2f2;
+}
+
 
 
 
