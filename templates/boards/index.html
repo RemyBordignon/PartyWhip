@@ -1,28 +1,89 @@
 {% extends "../base.html" %}
 
 {% block title %}
-Posts for {{ request.user.username }}
+Dashboard
 {% endblock %}
 
 {% block content %}
 
-{% if post_list  %}
-    <h2>Job Postings:</h2>
-    <ul>
-        {% for post in post_list %}
-            <div class="list-group-item"><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></div>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No Questions available</p>
-{% endif %}
+<!-- Search bar -->
+<div class="md-form">
+    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+</div>
 
-    <a href="{% url 'boards:create_post' %}">
-        <button class="btn btn-success">Create Post</button>
-    </a>
+<h2>Job Postings:</h2>
+<div class="container">
+    <div class="row">
+           <aside class="col-lg-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                        <div id = "sidebar" class="card" style="margin:20px 0">
+                                <div class="card-header"><h4>Sort By</h4></div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        Date
+                                        <label class="switch ">
+                                        <input type="checkbox" class="default">
+                                        <span class="slider"></span>
+                                        </label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Budget
+                                        <label class="switch ">
+                                        <input type="checkbox" class="primary">
+                                        <span class="slider"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <aside class="col-lg-10">
+                 {% if post_list %}
+                         <ul>
+                             <!-- <div id = "postlists" class="container">
+                                  <div class="row">
+                                    <div class="col-md-3"><h3>Title</h3></div>
+                                    <div class="col-md-3"><h3>Event Date</h3></div>
+                                    <div class="col-md-3"><h3>Budget</h3></div>
+                                    <div class="col-md-3"><h3>Location</h3></div>
+                                  </div>
+                            </div> -->
+                             {% for post in post_list %}
+                                 <!-- <div class="list-group-item"><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></div> -->
+                                 <!-- <div id = "postlists" class="container">
+                                      <div class="row">
+                                        <div class="col-md-3"><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></div>
+                                        <div class="col-md-3"><a>{{ post.event_date }}</a></div>
+                                        <div class="col-md-3"><a>{{ post.budget }}</a></div>
+                                        <div class="col-md-3"><a>{{ post.location }}</a></div>
+                                      </div> -->
+                                <!-- </div> -->
+                                <div id = "card" class="card text-white bg-secondary mb-3" style="width: 30rem;">
+                                  <div padding-left: 50px; class="card-body">
+                                    <h4 class="card-title">{{post.title}}</h4>
+                                    <p class="card-text"><dt>Event Date:</dt> {{post.event_date}} <br><dt>Budget:</dt> {{post.budget}} </br><dt>Location:</dt> {{post.location}} </p>
+                                    <a href="{% url 'boards:detail' post.id %}" class="card-link">Details</a>
+                                  </div>
+                                </div>
+                             {% endfor %}
+                         </ul>
+                 {% else %}
+                     <p>No Questions available</p>
+                 {% endif %}
 
-    <a href="{% url 'boards:create_bid' %}">
-        <button class="btn btn-success">Create Bid</button>
-    </a>
+                 <a href="{% url 'boards:create_post' %}">
+                     <button id = "button" class="btn btn-success pull-right">Create Post</button>
+                 </a>
 
+                 <a href="{% url 'boards:create_bid' %}">
+                     <button id = "button" class="btn btn-success pull-right">Create Bid</button>
+                 </a>
+                </div>
+            </aside>
+    </div>
+</div>
 {% endblock %}
