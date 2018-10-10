@@ -1,0 +1,23 @@
+{% extends "../base.html" %}
+
+{% block title %}
+My Posts
+{% endblock %}
+
+{% block content %}
+
+{% if post_list  %}
+    <h2>My Bids:</h2>
+    <ul>
+        {% for post in post_list %}
+             <div class="container">
+                  <div class="row">
+                    <div class="col-md-3"><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></div>
+                  </div>
+            </div>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You have not bidded on any posts</p>
+{% endif %}
+{% endblock %}
