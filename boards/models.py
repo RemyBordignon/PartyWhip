@@ -1,30 +1,48 @@
 from datetime import timezone, datetime
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 
 
 # Create your models here.
 class Post(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+
+    # Fields
     title = models.CharField(max_length=200, blank=False, verbose_name="Post Title", help_text="Please enter a title for the job post")
-    #poster = models.ForeignKey(User, related_name="poster", on_delete=models.CASCADE)
     pub_date = models.DateTimeField('date published')
-    #NEED AN END DATE
-    starting_price = models.IntegerField(blank=False, verbose_name="Starting Price", help_text="Enter the starting price for this job")
-    current_lowest_bid = models.IntegerField()
+    end_date = models.DateTimeField('end date')
+    event_date = models.DateTimeField('event date')
+    budget = models.IntegerField(blank=False, verbose_name="Maximum Budget", help_text="Enter your maximum price for the event")
+    location = models.CharField(max_length=100, verbose_name="Location", help_text="Enter Suburb")
+    comment = models.CharField(max_length=300, verbose_name="Bid Comments", help_text="Explaination")
+    winnerSelected = models.BooleanField(default=False)
 
     def valid_current_bid(self):
         return self.current_lowest_bid >= self.starting_price
+
+    def bidding_open(self):
+        # STUB FOR NOW
+        # return time.now() < end_date
+        return True;
 
     def __str__(self):
         return self.title
 
 
 class Bid(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    # leave basic for now, update to user
-    bidder_name = models.CharField(max_length=100)
     price = models.IntegerField()
+    comment = models.CharField(max_length=300, verbose_name="Bid Comments", help_text="Explaination")
+    contact_details = models.CharField(max_length=300, verbose_name="Contact Details", help_text="Enter Contact Number")
 
     def __str__(self):
         return str(self.price)
