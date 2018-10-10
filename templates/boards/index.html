@@ -15,13 +15,6 @@ Posts
     <h2>Job Postings:</h2>
     <ul>
         {% for post in post_list %}
-            <!-- <div class="list-group-item"><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></div> -->
-            <!-- <ul class="list-group row">
-                 <li class="list-group-item col-xs-6"><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></li>
-                 <li class="list-group-item col-xs-6"><a href="{% url 'boards:detail' post.id %}">{{ post.event_date }}</a></li>
-                 <li class="list-group-item col-xs-6"><a href="{% url 'boards:detail' post.id %}">{{ post.budget }}</a></li>
-                 <li class="list-group-item col-xs-6"><a href="{% url 'boards:detail' post.id %}">{{ post.location }}</a></li>
-             </ul> -->
              <div class="container">
                   <div class="row">
                     <div class="col-md-3"><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></div>
@@ -33,7 +26,7 @@ Posts
         {% endfor %}
     </ul>
 {% else %}
-    <p>No Questions available</p>
+    <p>No posts available</p>
 {% endif %}
 
     <a href="{% url 'boards:create_post' %}">

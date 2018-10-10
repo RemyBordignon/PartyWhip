@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 from boards.forms import PostForm, BidForm
-from boards.models import Post
+from boards.models import Post, Bid
 
 
 @login_required
@@ -40,7 +40,7 @@ def detail(request, post_id):
 def create_post(request):
     if request.method == "POST":
         # use this to add users to DB TABLE TODO
-        post = Post(pub_date=timezone.localtime(), winnerSelected=False)
+        post = Post(pub_date=timezone.localtime(), winner_selected=False)
         form = PostForm(instance=post, data=request.POST)
         if form.is_valid():
             form.save()
@@ -60,3 +60,14 @@ def create_bid(request):
     else:
         form = BidForm()
     return render(request, "boards/new_bid_form.html", {'form': form})
+
+@login_required
+def my_posts(request):
+    post_list = Post.objects.filter(user=request.user)
+    return render(request, 'boards/my_posts.html', {'post_list': post_list})
+
+@login_required
+def my_bids(request):
+    post_list = Bid.objects.filter(user=request.user)
+    return render(request, 'boards/my_bids.html', {'post_list': post_list})
+
