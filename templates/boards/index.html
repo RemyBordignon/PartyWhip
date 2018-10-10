@@ -7,34 +7,33 @@ Posts
 {% block content %}
 
 <!-- Search bar -->
-<div class="md-form">
-    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-</div>
+<input class="form-control mt-3 mb-3" type="search" placeholder="Search Postings" aria-label="Search">
 
-{% if post_list  %}
-    <h2>Job Postings:</h2>
-    <ul>
-        {% for post in post_list %}
-             <div class="container">
-                  <div class="row">
-                    <div class="col-md-3"><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></div>
-                    <div class="col-md-3"><h2>Column 1</h2></div>
-                    <div class="col-md-3"><h2>Column 2</h2></div>
-                    <div class="col-md-3"><h2>Column 3</h2></div>
-                  </div>
-            </div>
-        {% endfor %}
-    </ul>
+{% if post_list %}
+<h2>Job Postings:</h2>
+<div>
+    {% for post in post_list %}
+    <div class="card mt-3 mb-3">
+        <div class="card-header">
+            <strong>{{post.title}}</strong>
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{post.comment}}</p>
+            <a href="{% url 'boards:detail' post.id %}" class="btn btn-primary">Details</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% else %}
-    <p>No posts available</p>
+<p>No posts available</p>
 {% endif %}
 
-    <a href="{% url 'boards:create_post' %}">
-        <button class="btn btn-success">Create Post</button>
-    </a>
+<a href="{% url 'boards:create_post' %}">
+    <button class="btn btn-success">Create Post</button>
+</a>
 
-    <a href="{% url 'boards:create_bid' %}">
-        <button class="btn btn-success">Create Bid</button>
-    </a>
+<a href="{% url 'boards:create_bid' %}">
+    <button class="btn btn-success">Create Bid</button>
+</a>
 
 {% endblock %}
