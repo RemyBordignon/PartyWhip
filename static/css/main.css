@@ -37,6 +37,17 @@ alert alert-primary {
     background-color: red
 }
 
+.numberCircle {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background:darkcyan;
+    border: 2px solid black;
+    color:white;
+    text-align: center;
+    font: 32px Arial, sans-serif;
+    display: inline-block;
+}
 
 
 
