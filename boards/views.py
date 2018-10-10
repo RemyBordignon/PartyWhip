@@ -68,6 +68,6 @@ def my_posts(request):
 
 @login_required
 def my_bids(request):
-    post_list = Bid.objects.filter(user=request.user)
-    return render(request, 'boards/my_bids.html', {'post_list': post_list})
+    bid_list = Bid.objects.filter(user=request.user)
+    return render(request, 'boards/my_bids.html', {'bid_list': bid_list})
 
