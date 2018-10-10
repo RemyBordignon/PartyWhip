@@ -27,8 +27,7 @@ def detail(request, question_id):
 def create_post(request):
     if request.method == "POST":
         # use this to add users to DB TABLE TODO
-        # post = Post(from_user=request.user)
-        post = Post(pub_date=timezone.localtime(), current_lowest_bid=100)
+        post = Post(pub_date=timezone.localtime(), winnerSelected=False)
         form = PostForm(instance=post, data=request.POST)
         if form.is_valid():
             form.save()
