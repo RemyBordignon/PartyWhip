@@ -33,6 +33,10 @@ hr {
     border-radius: 15px;
 }
 
+alert alert-primary {
+    background-color: red
+}
+
 
 
 

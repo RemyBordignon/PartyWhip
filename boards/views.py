@@ -18,9 +18,22 @@ def index(request):
 
 
 @login_required
-def detail(request, question_id):
-    post = get_object_or_404(Post, pk=question_id)
-    return render(request, 'boards/detail.html', {'post': post})
+def detail(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+
+    if post.end_date > timezone.localtime():
+        status = "OPEN"
+    elif post.end_date <= timezone.localtime():
+        status = "CLOSED"
+    elif post.winnerSelected:
+        status = "ASSIGNED"
+
+    context = {
+        'post': post,
+        'status': status
+    }
+
+    return render(request, 'boards/detail.html', context)
 
 
 @login_required
