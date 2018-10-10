@@ -31,6 +31,8 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
+                <li><a href="{% url 'boards:my_posts' %}">My Posts</a></li>
+                <li><a href="{% url 'boards:my_bids' %}">My Bids</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             {% else %}
                 <li><a href="{% url 'login' %}">Login</a> </li>

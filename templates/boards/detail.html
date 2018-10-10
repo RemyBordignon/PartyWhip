@@ -39,7 +39,11 @@
             {% for bid in post.bid_set.all %}
 
                 <div id="bids">
+<<<<<<< HEAD
                     <h3 id>{{ bid.user.username }} &nbsp
+=======
+                    <h3 id>{{ bid.user }} &nbsp &nbsp
+>>>>>>> master
                         <small id="bidder-price" class="text-muted">Price: ${{ bid.price }}</small>
                     </h3>
                     <br>
