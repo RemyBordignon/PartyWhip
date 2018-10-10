@@ -25,7 +25,7 @@ def detail(request, post_id):
         status = "OPEN"
     elif post.end_date <= timezone.localtime():
         status = "CLOSED"
-    elif post.winnerSelected:
+    elif post.winner_selected:
         status = "ASSIGNED"
 
     context = {
