@@ -6,18 +6,24 @@ My Posts
 
 {% block content %}
 
-{% if post_list  %}
-    <h2>My Posts:</h2>
-    <ul>
-        {% for post in post_list %}
-             <div class="container">
-                  <div class="row">
-                    <div class="col-md-3"><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></div>
-                  </div>
-            </div>
-        {% endfor %}
-    </ul>
+{% if post_list %}
+<h2>My Posts:</h2>
+<div>
+    {% for post in post_list %}
+    <div class="card mt-3 mb-3">
+        <div class="card-header">
+            <strong>{{post.title}}</strong>
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{post.comment}}</p>
+            <p class="card-text"><i id="icon" class="far fa-calendar-alt"></i> {{post.event_date}}</p>
+            <p class="card-text"><i id="icon" class="fas fa-map-marker-alt"></i> {{post.location}}</p>
+            <a href="{% url 'boards:detail' post.id %}" class="btn btn-success">Details</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% else %}
-    <p>No posts available</p>
+<p>No posts available</p>
 {% endif %}
 {% endblock %}
