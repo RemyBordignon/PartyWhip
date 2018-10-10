@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block content %}
+    {% if status != "OPEN" %}
+        <div align="center" class="alert alert-danger" role="alert">
+            This post is {{ status }}
+        </div>
+    {% endif %}
     <div class="jumbotron">
         <h1 align="center">{{ post.title }}</h1>
         <h4 align="center">Closing Date: {{ post.end_date }}</h4>
