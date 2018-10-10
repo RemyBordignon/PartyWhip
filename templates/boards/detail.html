@@ -11,7 +11,7 @@
             <ul>
                 {% for bid in post.bid_set.all %}
                     <div class="list-group-item-text">
-                        <li>{{ bid.bidder_name }} : {{ bid.price }}</li>
+                        <li>{{ bid.user.username }} : {{ bid.price }}</li>
                     </div>
                 {% endfor %}
             </ul>
