@@ -7,14 +7,14 @@
 {% block content %}
     <div class="jumbotron">
         <h1 align="center">{{ post.title }}</h1>
-        <h4 align="center">Closing Date: </h4>
+        <h4 align="center">Closing Date: {{ post.end_date }}</h4>
         <br>
-        <h3><i id="icon" class="far fa-calendar-alt"></i> Event Date: </h3>
-        <h3><i id="icon" class="fas fa-map-marker-alt"></i> Location: </h3>
-        <h3><i id="icon" class="fas fa-dollar-sign"></i> Budget: </h3>
+        <h3><i id="icon" class="far fa-calendar-alt"></i> Event Date: {{ post.event_date }}</h3>
+        <h3><i id="icon" class="fas fa-map-marker-alt"></i> Location: {{ post.location }}</h3>
+        <h3><i id="icon" class="fas fa-dollar-sign"></i> Budget: {{ post.budget }}</h3>
         <br>
-        <h3>Description: </h3>
-        <div id="description"> i need someone to cook please </div>
+        <h3>Description </h3>
+        <div id="description"> {{ post.comment }} </div>
     </div>
     <div class="jumbotron">
         <h2>Current bids: </h2>
@@ -22,11 +22,13 @@
             {% for bid in post.bid_set.all %}
 
                 <div id="bids">
-                    <h3 id>{{ bid.bidder_name }} &nbsp &nbsp
+                    <h3 id>{{ bid.user.username }} &nbsp &nbsp
                         <small id="bidder-price" class="text-muted">Price: ${{ bid.price }}</small>
                     </h3>
-                    <h3>Contact Details: </h3>
-                    <div id="description">helllooo</div>
+                    <h3>Contact Details </h3>
+                    <div id="description">{{ bid.contact_details }}</div>
+                    <h3>Comments</h3>
+                    <div id="description">{{ bid.comment }}</div>
 
 
 
