@@ -6,7 +6,7 @@ from django.db import models
 
 
 class Post(models.Model):
-    user = models.CharField('user')
+    user = models.CharField(max_length=200)
     title = models.CharField(max_length=200, blank=False, verbose_name="Post Title", help_text="Please enter a title for the job post")
     pub_date = models.DateTimeField('date published')
     end_date = models.DateTimeField('end date')
@@ -21,7 +21,7 @@ class Post(models.Model):
 
 
 class Bid(models.Model):
-    user = models.CharField('user')
+    user = models.CharField(max_length=200)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     price = models.IntegerField(blank=False, verbose_name="Bid Price", help_text="Please enter your bid amount")
     comment = models.CharField(max_length=300, verbose_name="Bid Comments", help_text="Enter extra information")

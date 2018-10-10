@@ -27,20 +27,13 @@
             {% for bid in post.bid_set.all %}
 
                 <div id="bids">
-                    <h3 id>{{ bid.user.username }} &nbsp &nbsp
+                    <h3 id>{{ bid.user }} &nbsp &nbsp
                         <small id="bidder-price" class="text-muted">Price: ${{ bid.price }}</small>
                     </h3>
                     <h3>Contact Details </h3>
                     <div id="description">{{ bid.contact_details }}</div>
                     <h3>Comments</h3>
                     <div id="description">{{ bid.comment }}</div>
-
-
-
-
-    {#                <div class="list-group-item-text">#}
-    {#                    <li>{{ bid.bidder_name }} : {{ bid.price }}</li>#}
-    {#                </div>#}
                 </div>
                 <br>
             {% endfor %}
