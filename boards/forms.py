@@ -21,4 +21,4 @@ class PostForm(ModelForm):
 class BidForm(ModelForm):
     class Meta:
         model = Bid
-        exclude = ('user',)
+        exclude = ('user', 'post')
