@@ -8,7 +8,7 @@ predicate Sorted(a:array<int>, low:int, high:int)
 
 method BubbleSort(a:array<int>)
 	modifies a
-	requires a.Length>1
+	requires a.Length > 1
 	ensures Sorted(a, 0, a.Length)
 	ensures multiset(a[..]) == multiset(old(a[..]))
 {
@@ -16,8 +16,8 @@ method BubbleSort(a:array<int>)
 
 	while (i < a.Length)
 		invariant 0 <= i <= a.Length
-		invariant Sorted(a, a.Length - i, a.Length)
 		invariant forall x :: a.Length-i <= x < a.Length ==> forall y :: 0 <= y < a.Length-i ==> a[x] >= a[y]
+		invariant Sorted(a, a.Length - i, a.Length)
 		invariant multiset(a[..]) == multiset(old(a[..]))
 	{
 		var j := 0;
