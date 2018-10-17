@@ -5,10 +5,16 @@
 {% endblock %}
 
 {% block content %}
-{% if status != "OPEN" %}
-<div align="center" class="alert alert-danger" role="alert">
-    This post is {{ status }}
-</div>
+{% if status == "CLOSED" %}
+    <div align="center" class="alert alert-danger" role="alert">
+        This post is {{ status }}
+    </div>
+{% endif %}
+
+{% if status == "ASSIGNED" %}
+    <div align="center" class="alert alert-danger" role="alert">
+        This post has been {{ status }}
+    </div>
 {% endif %}
 <div class="card bg-light mt-3">
     <div class="container p-5">
@@ -19,15 +25,32 @@
                 <p><i id="icon" class="far fa-calendar-alt"></i> &nbsp{{ post.event_date }}</p>
                 <p><i id="icon" class="fas fa-map-marker-alt"></i> &nbsp{{ post.location }}</p>
                 <br>
-                <strong>Details </strong>
+                <strong>Details</strong>
                 <p id="description"> {{ post.comment }} </p>
             </div>
-            <div id="budget-box" class="col-sm-2">
-                <strong align="center">Budget</strong>
-                <p id="budget">${{ post.budget }}</p>
-                <a href="{% url 'boards:create_bid' %}">
-                    <button class="btn btn-success btn-sm">Create Bid</button>
-                </a>
+
+
+
+            <div class="card bg-light mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                        <h5 id="budget-header">Budget</h5>
+                        </div>
+                        <div class="card-body">
+                            <p id="budget">${{ post.budget }}</p>
+                            <a href="{% url 'boards:create_bid' %}">
+                                {% if status != "OPEN" %}
+                                    <button id="bid-button" class="btn btn-success btn-sm" disabled>Create Bid</button>
+                                {% else %}
+                                    <button id="bid-button" class="btn btn-success btn-sm" >Create Bid</button>
+                                {% endif %}
+                            </a>
+                        </div>
+
+                    </div>
+
+
+
             </div>
         </div>
     </div>
