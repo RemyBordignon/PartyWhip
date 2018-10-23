@@ -41,6 +41,7 @@ def create_post(request):
     if request.method == "POST":
         # use this to add users to DB TABLE TODO
         post = Post(user=request.user, pub_date=timezone.localtime(), winner_selected=False)
+        post = Post(user=request.user, pub_date=timezone.localtime(), winner_selected=False, )
         form = PostForm(instance=post, data=request.POST)
         if form.is_valid():
             form.save()

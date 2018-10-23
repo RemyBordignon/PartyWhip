@@ -1,7 +1,7 @@
 {% extends "../base.html" %}
 
 {% block title %}
-Posts
+    Posts
 {% endblock %}
 
 {% block content %}
@@ -15,121 +15,141 @@ Posts
   </form>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-3" style = "padding-top: 16px">
-    <form>
-        <div class="card">
-      	<article class="card-group-item">
-      		<header class="card-header">
-      			<h6 class="title">Sort By</h6>
-      		</header>
-      		<div class="filter-content">
-      			<div class="card-body">
-      				<label class="form-check">
-      				  <input class="form-check-input" type="checkbox" id = "mostrecent">
-      				  <span class="form-check-label">
-      				    Most Recent
-      				  </span>
-      				</label> <!-- form-check.// -->
-      				<label class="form-check">
-      				  <input class="form-check-input" type="checkbox" id = "lowestBudget">
-      				  <span class="form-check-label">
-      				    Lowest Budget
-      				  </span>
-      				</label>  <!-- form-check.// -->
-      				<label class="form-check">
-      				  <input class="form-check-input" type="checkbox" id = "highestbudget">
-      				  <span class="form-check-label">
-      				    Highest Budget
-      				  </span>
-      				</label>  <!-- form-check.// -->
-                    <label class="form-check">
-      				  <input class="form-check-input" type="checkbox" id = "ascendingdate" >
-      				  <span class="form-check-label">
-      				    Event Date (Ascending)
-      				  </span>
-      				</label>  <!-- form-check.// -->
-                    <label class="form-check">
-      				  <input class="form-check-input" type="checkbox" id = "descendingdate">
-      				  <span class="form-check-label">
-      				    Event Date (Descending)
-      				  </span>
-      				</label>  <!-- form-check.// -->
+    <div class="container">
+        <div class="row">
+            <div class="col-3" style="padding-top: 16px">
+                <form type="get" action=".">
+                    <div class="card">
+                        <!-- sorting options -->
+                        <article class="card-group-item">
 
-      			</div> <!-- card-body.// -->
-      		</div>
-      	</article> <!-- card-group-item.// -->
+                            <header class="card-header">
+                                <h6 class="title">Sort By</h6>
+                            </header>
 
-      	<article class="card-group-item">
-      		<header class="card-header">
-      			<h6 class="title">Filter By</h6>
-      		</header>
-      		<div class="filter-content">
-      			<div class="card-body">
-      			<label class="form-check">
-      			  <!-- <input class="form-check-input" type="checkbox">
-      			  <span class="form-check-label"> -->
-      			    Budget
-                    <div id="rangeBox">
-                           <div id="inputRange">
-                               <input type="number" step="1" min="0" max="1000" placeholder="Min" id="minBudget" >
-                               <input type="number" step="1" min="0" max="1000" placeholder="Max" id="maxBudget">
-                           </div>
-                      </div>
-                  <label class="form-check">
-                    <input class="form-check-input" type="checkbox" id = "weekfilter">
-                    <span class="form-check-label">
-                      Next Week
-                    </span>
-                  </label>
-      			<label class="form-check">
-      			  <input class="form-check-input" type="checkbox" id = monthfilter>
-      			  <span class="form-check-label">
-      			    Next Month
-      			  </span>
-      			</label>
-                <a href="{% url 'boards:index' %}" class="btn btn-primary active" role="button" aria-pressed="true">Submit</a>
-                <!-- <input class="btn btn-primary" type="submit" value="Submit"> -->
-      			</div> <!-- card-body.// -->
-      		</div>
-      	 </article> <!-- card-group-item.// -->
-        </div> <!-- card.// -->
-      <form>
-    </div>
-    <div class="col-9">
-        {% if post_list %}
-        <div>
-            {% for post in post_list %}
-            <div class="card mt-3 mb-3">
-                <div class="card-header">
-                    <strong>{{post.title}}</strong>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">{{post.comment}}</p>
-                    <p class="card-text"><i id="icon" class="far fa-calendar-alt"></i> {{post.event_date}}</p>
-                    <p class="card-text"><i id="icon" class="fas fa-map-marker-alt"></i> {{post.location}}</p>
-                    <a href="{% url 'boards:detail' post.id %}" class="btn btn-success">Details</a>
-                </div>
+                            <div class="filter-content">
+                                <div class="card-body">
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="mostrecent">
+                                        <span class="form-check-label">
+      				                        Most Recent
+      				                    </span>
+                                    </label> <!-- form-check.// -->
+
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="lowestBudget">
+                                        <span class="form-check-label">
+      				                        Lowest Budget
+      				                    </span>
+                                    </label>  <!-- form-check.// -->
+
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="highestbudget">
+                                        <span class="form-check-label">
+      				                        Highest Budget
+      				                    </span>
+                                    </label>  <!-- form-check.// -->
+
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="ascendingdate">
+                                        <span class="form-check-label">
+      				                        Event Date (Ascending)
+      				                    </span>
+                                    </label>  <!-- form-check.// -->
+
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="descendingdate">
+                                        <span class="form-check-label">
+      				                        Event Date (Descending)
+      				                    </span>
+                                    </label>  <!-- form-check.// -->
+                                </div> <!-- card-body.// -->
+                            </div>
+                        </article> <!-- card-group-item.// -->
+
+                        <!-- Filtering options -->
+                        <article class="card-group-item">
+
+                            <header class="card-header">
+                                <h6 class="title">Filter By</h6>
+                            </header>
+
+                            <div class="filter-content">
+                                <div class="card-body">
+                                    <label class="form-check">
+                                        <!-- <input class="form-check-input" type="checkbox">
+                                        <span class="form-check-label"> -->
+                                        Budget
+                                        <div id="rangeBox">
+                                            <div id="inputRange">
+                                                <input type="number" step="1" min="0" max="1000" placeholder="Min" id="minBudget">
+                                                <input type="number" step="1" min="0" max="1000" placeholder="Max" id="maxBudget">
+                                            </div>
+                                        </div>
+                                    </label>
+
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="weekfilter">
+                                        <span class="form-check-label">
+                                            Next Week
+                                        </span>
+                                    </label>
+
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" id=monthfilter>
+                                        <span class="form-check-label">
+                                            Next Month
+                                        </span>
+                                    </label>
+
+                                    <input id="search_submit" type="submit" value="submit">
+
+{#                                    <a href="{% url 'boards:index' %}" class="btn btn-primary active" role="button"#}
+{#                                       aria-pressed="true">Submit</a>#}
+{##}
+{#                                    <input class="btn btn-primary" type="submit" value="Submit">#}
+                                </div> <!-- card-body.// -->
+                            </div>
+                        </article> <!-- card-group-item.// -->
+                    </div> <!-- card.// -->
+                </form>
             </div>
-            {% endfor %}
+
+            <div class="col-9">
+                {% if post_list %}
+                    <div>
+                        {% for post in post_list %}
+                            <div class="card mt-3 mb-3">
+                                <div class="card-header">
+                                    <strong>{{ post.title }}</strong>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">{{ post.comment }}</p>
+                                    <p class="card-text"><i id="icon"
+                                                            class="far fa-calendar-alt"></i> {{ post.event_date }}</p>
+                                    <p class="card-text"><i id="icon"
+                                                            class="fas fa-map-marker-alt"></i> {{ post.location }}</p>
+                                    <a href="{% url 'boards:detail' post.id %}" class="btn btn-success">Details</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>No posts available</p>
+                {% endif %}
+            </div>
         </div>
-        {% else %}
-        <p>No posts available</p>
-        {% endif %}
+        <!-- <div class="row">
+          <div class="col">
+            1 of 3
+          </div>
+          <div class="col">
+            2 of 3
+          </div>
+          <div class="col">
+            3 of 3
+          </div>
+        </div> -->
     </div>
-  </div>
-  <!-- <div class="row">
-    <div class="col">
-      1 of 3
-    </div>
-    <div class="col">
-      2 of 3
-    </div>
-    <div class="col">
-      3 of 3
-    </div>
-  </div> -->
-</div>
 
 {% endblock %}
