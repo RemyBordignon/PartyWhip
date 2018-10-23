@@ -5,15 +5,15 @@
 {% endblock %}
 
 {% block content %}
-{% if status == "CLOSED" %}
+{% if post.status == "CLOSED" %}
     <div align="center" class="alert alert-danger" role="alert">
-        This post is {{ status }}
+        This post is {{ post.status }}
     </div>
 {% endif %}
 
-{% if status == "ASSIGNED" %}
+{% if post.status == "ASSIGNED" %}
     <div align="center" class="alert alert-danger" role="alert">
-        This post has been {{ status }}
+        This post has been {{ post.status }}
     </div>
 {% endif %}
 <div class="card bg-light mt-3">
@@ -29,17 +29,15 @@
                 <p id="description"> {{ post.comment }} </p>
             </div>
 
-
-
             <div class="card bg-light mt-3">
-                    <div class="card">
+                    <div class="card" id="budget-card">
                         <div class="card-header">
                         <h5 id="budget-header">Budget</h5>
                         </div>
                         <div class="card-body">
                             <p id="budget">${{ post.budget }}</p>
                             <a href="{% url 'boards:create_bid' post_id=post.id %}">
-                                {% if status != "OPEN" %}
+                                {% if post.status != "OPEN" %}
                                     <button id="bid-button" class="btn btn-success btn-sm" disabled>Create Bid</button>
                                 {% else %}
                                     <button id="bid-button" class="btn btn-success btn-sm" >Create Bid</button>
@@ -59,6 +57,15 @@
         <div class="card">
             <div class="card-header">
                 <strong><i class="fas fa-user-circle"></i> {{ bid.user }} | ${{bid.price}}</strong>
+                {% if post.status == "CLOSED" %}
+                    {% if post.user == user.username %}
+                        <form action="{% url 'boards:winner_selected' post_id=post.id %}">
+                            {% if post.winner_selected == False %}
+                                <button id="winner-selected-button" class="btn btn-success btn-sm" >Choose This Bidder</button>
+                            {% endif %}
+                        </form>
+                    {% endif %}
+                {% endif %}
             </div>
             <div class="card-body">
                 <i class="fas fa-address-book"></i>
