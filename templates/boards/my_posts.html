@@ -7,12 +7,19 @@ My Posts
 {% block content %}
 
 {% if post_list %}
-<h2>My Posts:</h2>
 <div>
     {% for post in post_list %}
     <div class="card mt-3 mb-3">
         <div class="card-header">
-            <strong>{{post.title}}</strong>
+            <strong>{{post.title}} |
+                {% if post.status == "OPEN" %}
+                    <p id="status-open">{{ post.status }}</p>
+                {% elif post.status == "CLOSED" %}
+                    <p id="status-closed">{{ post.status }}</p>
+                {% elif post.status == "ASSIGNED" %}
+                    <p id="status-assigned">{{ post.status }}</p>
+                {% endif %}
+            </strong>
         </div>
         <div class="card-body">
             <p class="card-text">{{post.comment}}</p>

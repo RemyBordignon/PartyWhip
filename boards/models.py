@@ -15,6 +15,7 @@ class Post(models.Model):
     location = models.CharField(max_length=100, verbose_name="Location", help_text="Enter Suburb")
     comment = models.CharField(max_length=300, verbose_name="Bid Comments", help_text="Enter extra information")
     winner_selected = models.BooleanField(default=False)
+    status = models.CharField(max_length=10, default="OPEN")
 
     def __str__(self):
         return self.title

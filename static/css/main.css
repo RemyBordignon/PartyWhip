@@ -70,11 +70,35 @@ jumbotron {
 }
 
 #budget {
-    font-size: 45px;
+    text-align: center;
+    font-size: 150%;
 }
 
 #bid-button {
     width: 125px;
+}
+
+#budget-card {
+    max-width: 10rem;
+}
+
+#navbar {
+    margin-bottom: 20px;
+}
+
+#status-closed {
+    color: red;
+    display: inline;
+}
+
+#status-open {
+    color: green;
+    display: inline;
+}
+
+#status-assigned {
+    color: blue;
+    display: inline;
 }
 
 
