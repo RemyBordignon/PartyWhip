@@ -1,6 +1,8 @@
 from django.forms import ModelForm
 from django import forms
 
+from django.core.exceptions import ValidationError
+
 from boards.models import Post, Bid
 
 
@@ -38,14 +40,14 @@ TIME_FILTER = [
     ('this_month', 'This Month'),
 ]
 
+def validate_positive(value):
+    if value < 0:
+        raise ValidationError('Enter positive Value')
+    return value
+
+
 class OptionsForm(forms.Form):
-    sort_option = forms.CharField(label='Filter', widget=forms.RadioSelect(choices=SORT_BY), required=False)
-    min_value = forms.FloatField(min_value=0, max_value=100000, required=False)
-    max_value = forms.FloatField(min_value=0, max_value=100000, required=False)
-    time_range = forms.CharField(label='Time Range', widget=forms.RadioSelect(choices=TIME_FILTER), required=False)
-
-    def is_valid(self):
-
-        print("NEEDS VALIDATION")
-        return True
-
+    sort_option = forms.ChoiceField(choices=SORT_BY, widget=forms.RadioSelect(), required=False)
+    min_value = forms.FloatField(min_value=0, max_value=100000, required=False, validators=[validate_positive])
+    max_value = forms.FloatField(min_value=0, max_value=100000, required=False, validators=[validate_positive])
+    time_range = forms.ChoiceField(choices=TIME_FILTER, widget=forms.RadioSelect(), required=False)

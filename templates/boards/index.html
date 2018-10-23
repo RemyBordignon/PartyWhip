@@ -1,4 +1,5 @@
 {% extends "../base.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     Posts
@@ -21,11 +22,10 @@
                 <form type="get" action=".">
                     <div class="card">
                         <!-- sorting options -->
-
                         <form action="{% url 'boards:index' %}" method="post">
                             {% csrf_token %}
-                            {{ form }}
-                            <input type="submit" value="Submit">
+                            {{ form | crispy}}
+                            <input type="submit" value="Apply">
                         </form>
 {#                        <article class="card-group-item">#}
 {##}
