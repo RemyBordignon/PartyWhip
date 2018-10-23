@@ -57,12 +57,14 @@
         <div class="card">
             <div class="card-header">
                 <strong><i class="fas fa-user-circle"></i> {{ bid.user }} | ${{bid.price}}</strong>
-                {% if post.user == user.username %}
-                    <form action="{% url 'boards:select_winner' post_id=post.id %}">
-                        {% if post.winner_selected == False %}
-                            <button id="winner-selected-button" class="btn btn-success btn-sm" >Choose This Bidder</button>
-                        {% endif %}
-                    </form>
+                {% if post.status == "CLOSED" %}
+                    {% if post.user == user.username %}
+                        <form action="{% url 'boards:select_winner' post_id=post.id %}">
+                            {% if post.winner_selected == False %}
+                                <button id="winner-selected-button" class="btn btn-success btn-sm" >Choose This Bidder</button>
+                            {% endif %}
+                        </form>
+                    {% endif %}
                 {% endif %}
             </div>
             <div class="card-body">
