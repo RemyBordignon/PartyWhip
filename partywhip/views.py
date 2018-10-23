@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from .forms import SignUpForm
 
 
 def welcome(request):
@@ -21,5 +22,5 @@ def signup(request):
             login(request, user)
             return redirect('boards:index')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'partywhip/signup.html', {'form': form})
