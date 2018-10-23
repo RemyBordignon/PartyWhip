@@ -5,15 +5,74 @@
 {% endblock %}
 
 {% block content %}
-    <div class="jumbotron">
-            <h1>{{ post.title }}</h1>
-            <h3>Current bids: </h3>
-            <ul>
-                {% for bid in post.bid_set.all %}
-                    <div class="list-group-item-text">
-                        <li>{{ bid.user.username }} : {{ bid.price }}</li>
-                    </div>
-                {% endfor %}
-            </ul>
+{% if status == "CLOSED" %}
+    <div align="center" class="alert alert-danger" role="alert">
+        This post is {{ status }}
     </div>
-{% endblock %}
+{% endif %}
+
+{% if status == "ASSIGNED" %}
+    <div align="center" class="alert alert-danger" role="alert">
+        This post has been {{ status }}
+    </div>
+{% endif %}
+<div class="card bg-light mt-3">
+    <div class="container p-5">
+        <h1 align="center">{{ post.title }}</h1>
+        <p align="center">Closing Date: {{ post.end_date }}</p>
+        <div class="row">
+            <div class="col-sm-10">
+                <p><i id="icon" class="far fa-calendar-alt"></i> &nbsp{{ post.event_date }}</p>
+                <p><i id="icon" class="fas fa-map-marker-alt"></i> &nbsp{{ post.location }}</p>
+                <br>
+                <strong>Details</strong>
+                <p id="description"> {{ post.comment }} </p>
+            </div>
+
+
+
+            <div class="card bg-light mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                        <h5 id="budget-header">Budget</h5>
+                        </div>
+                        <div class="card-body">
+                            <p id="budget">${{ post.budget }}</p>
+                            <a href="{% url 'boards:create_bid' %}">
+                                {% if status != "OPEN" %}
+                                    <button id="bid-button" class="btn btn-success btn-sm" disabled>Create Bid</button>
+                                {% else %}
+                                    <button id="bid-button" class="btn btn-success btn-sm" >Create Bid</button>
+                                {% endif %}
+                            </a>
+                        </div>
+
+                    </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card bg-light mt-3">
+    <div class="container p-5">
+        <h3 align="center">Current Bids</h3>
+        {% for bid in post.bid_set.all %}
+        <div class="card">
+            <div class="card-header">
+                <strong><i class="fas fa-user-circle"></i> {{ bid.user }} | ${{bid.price}}</strong>
+            </div>
+            <div class="card-body">
+                <i class="fas fa-address-book"></i>
+                <p class="card-text">{{ bid.contact_details }}</p>
+                <i class="fas fa-comments"></i>
+                <p class="card-text">{{ bid.comment }}</p>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+
+    </div>
+    {% endblock %}

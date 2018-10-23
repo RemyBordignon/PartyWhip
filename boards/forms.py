@@ -15,10 +15,10 @@ class PostForm(ModelForm):
             'event_date': DateInput(),
             'end_date': DateInput(),
         }
-        exclude = ('pub_date', 'winnerSelected',)
+        exclude = ('user', 'pub_date', 'winner_selected',)
 
 
 class BidForm(ModelForm):
     class Meta:
         model = Bid
-        exclude = ('user',)
+        exclude = ('user', 'post')

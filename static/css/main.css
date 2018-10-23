@@ -4,42 +4,75 @@
    Author's custom styles
    ========================================================================== */
 
-#sidebar {
-    height: 200px;
-    width: 20%;
+html * {
+    font-family: "Verdana";
+
 }
 
-#postlists {
-    padding-right: 200px;
+#description {
+    margin-right: 20px;
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width:thin;
+    border-color: #D8D8D8;
+
 }
 
-#button {
-    background-color: blue; /* Green */
-    border: none;
-    color: white;
-    /*padding: 15px 32px;*/
+#bidder-price {
+    color: forestgreen;
+    font-size: 17px;
+}
+
+hr {
+    color: black;
+}
+
+#icon {
+    padding: 2px;
+}
+
+#bids {
+    margin-right: 20px;
+    background-color: #F6F6F6;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+alert alert-primary {
+    background-color: red;
+}
+
+.welcomeFeature {
+    background-image: url(../images/welcome.jpg);
+    background-size: cover;
+    height: 500px;
+    width:auto
+}
+#post-title {
+    font-weight: bold;
+    color: #4C9B4A;
+}
+
+.homeIcons {
+    font-size: 80px;
+}
+jumbotron {
+    background-color: #f1f1f1;
+}
+
+#budget-header {
+    padding-top: 5px;
+    font-size: 18px;
+    font-weight: bold;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 11px;
 }
 
-#card {
-    position: relative;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.25rem;
+#budget {
+    font-size: 45px;
 }
 
-#cardbody {
-    
+#bid-button {
+    width: 125px;
 }
