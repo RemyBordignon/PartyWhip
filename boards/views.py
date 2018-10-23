@@ -9,8 +9,9 @@ from boards.models import Post, Bid
 
 
 @login_required
-def index(request):
+def index(request, ):
     post_list = Post.objects.order_by('-pub_date')[:5]
+
     context = {
         'post_list': post_list
     }
@@ -35,7 +36,6 @@ def detail(request, post_id):
 
     return render(request, 'boards/detail.html', context)
 
-
 @login_required
 def create_post(request):
     if request.method == "POST":
@@ -51,16 +51,18 @@ def create_post(request):
 
 
 @login_required
-def create_bid(request):
+def create_bid(request, post_id):
+    p = get_object_or_404(Post, pk=post_id)
+    print(p)
     if request.method == "POST":
-        bid = Bid(user=request.user)
+        bid = Bid(user=request.user, post=p)
         form = BidForm(instance=bid, data=request.POST)
         if form.is_valid():
             form.save()
             return redirect('boards:index')
     else:
         form = BidForm()
-    return render(request, "boards/new_bid_form.html", {'form': form})
+    return render(request, "boards/new_bid_form.html", {'form': form, 'post_id': post_id})
 
 @login_required
 def my_posts(request):
@@ -71,3 +73,13 @@ def my_posts(request):
 def my_bids(request):
     bid_list = Bid.objects.filter(user=request.user)
     return render(request, 'boards/my_bids.html', {'bid_list': bid_list})
+
+@login_required
+def search(request):
+    search_query = request.GET.get('search_box', None)
+    search_results = Post.objects.filter(title__contains=search_query)
+
+    context = {
+        'post_list': search_results
+    }
+    return render(request, 'boards/index.html', context)

@@ -7,10 +7,10 @@ New Bid
 
 
 {% block content %}
-    <form method="post" action="{% url 'boards:create_bid' %}">
+    <form method="post" action="{% url 'boards:create_bid' post_id=post_id %}">
         {{ form | crispy}}
 
         {% csrf_token %}
         <button type="submit">Create Bid</button>
     </form>
-{%  endblock %}
+{% endblock %}

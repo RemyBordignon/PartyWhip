@@ -7,7 +7,10 @@ Posts
 {% block content %}
 
 <!-- Search bar -->
-<input class="form-control mt-3 mb-3" type="search" placeholder="Search Postings" aria-label="Search">
+<form type="get" action="{% url 'boards:search' %}" style="margin: 0">
+    <input  class="form-control mt-3 mb-3" type="search" placeholder="Search Postings" aria-label="Search" id="search_box" name="search_box" >
+    <button id="search_submit" type="submit" >Submit</button>
+</form>
 
 <div class="container">
   <div class="row">
