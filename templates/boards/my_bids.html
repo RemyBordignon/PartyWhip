@@ -27,6 +27,12 @@ My Bids
             <p class="card-text"><i id="icon" class="far fa-calendar-alt"></i> {{bid.post.event_date.date}}</p>
             <p class="card-text"><i id="icon" class="fas fa-map-marker-alt"></i> {{bid.post.location}}</p>
             <a href="{% url 'boards:detail' bid.post.id %}" class="btn btn-success">Details</a>
+            <hr>
+            <strong>My Bid | ${{bid.price}}</strong>
+            <br>
+            <br>
+            <p class="card-text"><i class="fas fa-address-book"></i> {{ bid.contact_details }}</p>
+            <p class="card-text"><i class="fas fa-comments"></i> {{ bid.comment }}</p>
         </div>
     </div>
     {% endfor %}

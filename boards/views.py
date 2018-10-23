@@ -118,14 +118,14 @@ def create_bid(request, post_id):
 
 @login_required
 def my_posts(request):
-    post_list = Post.objects.filter(user=request.user)
+    post_list = Post.objects.filter(user=request.user).order_by('-pub_date')
 
     return render(request, 'boards/my_posts.html', {'post_list': post_list})
 
 
 @login_required
 def my_bids(request):
-    bid_list = Bid.objects.filter(user=request.user)
+    bid_list = Bid.objects.filter(user=request.user).order_by('-post__pub_date')
     return render(request, 'boards/my_bids.html', {'bid_list': bid_list})
 
 @login_required
