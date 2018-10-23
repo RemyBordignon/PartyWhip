@@ -26,12 +26,13 @@ def detail(request, post_id):
         post.status = "OPEN"
     elif post.end_date <= timezone.localtime():
         post.status = "CLOSED"
-    elif post.winner_selected:
+    if post.winner_selected == True:
         post.status = "ASSIGNED"
 
     post.save()
     context = {
         'post': post,
+        'user': request.user,
     }
 
     return render(request, 'boards/detail.html', context)
@@ -64,6 +65,7 @@ def create_bid(request, post_id):
         form = BidForm()
     return render(request, "boards/new_bid_form.html", {'form': form, 'post_id': post_id})
 
+
 @login_required
 def my_posts(request):
     post_list = Post.objects.filter(user=request.user)
@@ -75,4 +77,14 @@ def my_posts(request):
 def my_bids(request):
     bid_list = Bid.objects.filter(user=request.user)
     return render(request, 'boards/my_bids.html', {'bid_list': bid_list})
+
+
+@login_required
+def set_winner_selected(request, post_id):
+    p = get_object_or_404(Post, pk=post_id)
+    p.winner_selected = True
+    p.status = "ASSIGNED"
+    p.save()
+    return redirect('/boards/my_posts', request)
+
 

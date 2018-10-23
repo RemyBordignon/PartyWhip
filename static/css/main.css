@@ -101,6 +101,10 @@ jumbotron {
     display: inline;
 }
 
+#winner-selected-button {
+    float: right;
+}
+
 
 
 
