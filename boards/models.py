@@ -7,13 +7,13 @@ from django.db import models
 
 class Post(models.Model):
     user = models.CharField(max_length=200)
-    title = models.CharField(max_length=200, blank=False, verbose_name="Post Title", help_text="Please enter a title for the job post")
+    title = models.CharField(max_length=200, blank=False, verbose_name="Post Title")
     pub_date = models.DateTimeField('date published')
     end_date = models.DateTimeField('end date')
     event_date = models.DateTimeField('event date')
-    budget = models.IntegerField(blank=False, verbose_name="Maximum Budget", help_text="Enter your maximum price for the event")
-    location = models.CharField(max_length=100, verbose_name="Location", help_text="Enter Suburb")
-    comment = models.CharField(max_length=300, verbose_name="Bid Comments", help_text="Enter extra information")
+    budget = models.IntegerField(blank=False, verbose_name="Maximum Budget")
+    location = models.CharField(max_length=100, verbose_name="Location")
+    comment = models.CharField(max_length=300, verbose_name="Bid Comments")
     winner_selected = models.BooleanField(default=False)
     status = models.CharField(max_length=10, default="OPEN")
 
@@ -24,9 +24,9 @@ class Post(models.Model):
 class Bid(models.Model):
     user = models.CharField(max_length=200)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    price = models.IntegerField(blank=False, verbose_name="Bid Price", help_text="Please enter your bid amount")
-    comment = models.CharField(max_length=300, verbose_name="Bid Comments", help_text="Enter extra information")
-    contact_details = models.CharField(max_length=300, verbose_name="Contact Details", help_text="Enter Contact Number")
+    price = models.IntegerField(blank=False, verbose_name="Bid Price")
+    comment = models.CharField(max_length=300, verbose_name="Bid Comments")
+    contact_details = models.CharField(max_length=300, verbose_name="Contact Details")
 
     def __str__(self):
         return str(self.price)
