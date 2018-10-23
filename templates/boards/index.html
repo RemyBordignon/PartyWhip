@@ -20,14 +20,14 @@
         <div class="row">
             <div class="col-3" style="padding-top: 16px">
                 <form type="get" action=".">
-                    <div class="card">
+                    <div class="card" style="padding: 20px">
                         <!-- sorting options -->
                         <form action="{% url 'boards:index' %}" method="post">
                             {% csrf_token %}
                             {{ form | crispy }}
-                            <input type="submit" value="Apply">
+                            <input class="btn btn-success" type="submit" value="Apply">
                         </form>
-{#                        <article class="card-group-item">#}
+<!-- {#                        <article class="card-group-item">#}
 {##}
 {#                            <header class="card-header">#}
 {#                                <h6 class="title">Sort By</h6>#}
@@ -40,40 +40,39 @@
 {#                                        <span class="form-check-label">#}
 {#      				                        Most Recent#}
 {#      				                    </span>#}
-{#                                    </label> <!-- form-check.// -->#}
+{#                                    </label>#}
 {##}
 {#                                    <label class="form-check">#}
 {#                                        <input class="form-check-input" type="checkbox" id="lowestBudget">#}
 {#                                        <span class="form-check-label">#}
 {#      				                        Lowest Budget#}
 {#      				                    </span>#}
-{#                                    </label>  <!-- form-check.// -->#}
+{#                                    </label>#}
 {##}
 {#                                    <label class="form-check">#}
 {#                                        <input class="form-check-input" type="checkbox" id="highestbudget">#}
 {#                                        <span class="form-check-label">#}
 {#      				                        Highest Budget#}
 {#      				                    </span>#}
-{#                                    </label>  <!-- form-check.// -->#}
+{#                                    </label>#}
 {##}
 {#                                    <label class="form-check">#}
 {#                                        <input class="form-check-input" type="checkbox" id="ascendingdate">#}
 {#                                        <span class="form-check-label">#}
 {#      				                        Event Date (Ascending)#}
 {#      				                    </span>#}
-{#                                    </label>  <!-- form-check.// -->#}
+{#                                    </label>#}
 {##}
 {#                                    <label class="form-check">#}
 {#                                        <input class="form-check-input" type="checkbox" id="descendingdate">#}
 {#                                        <span class="form-check-label">#}
 {#      				                        Event Date (Descending)#}
 {#      				                    </span>#}
-{#                                    </label>  <!-- form-check.// -->#}
-{#                                </div> <!-- card-body.// -->#}
+{#                                    </label> #}
+{#                                </div> #}
 {#                            </div>#}
-{#                        </article> <!-- card-group-item.// -->#}
+{#                        </article>#}
 {##}
-{#                        <!-- Filtering options -->#}
 {#                        <article class="card-group-item">#}
 {##}
 {#                            <header class="card-header">#}
@@ -83,8 +82,6 @@
 {#                            <div class="filter-content">#}
 {#                                <div class="card-body">#}
 {#                                    <label class="form-check">#}
-{#                                        <!-- <input class="form-check-input" type="checkbox">#}
-{#                                        <span class="form-check-label"> -->#}
 {#                                        Budget#}
 {#                                        <div id="rangeBox">#}
 {#                                            <div id="inputRange">#}
@@ -114,11 +111,11 @@
 {#                                       aria-pressed="true">Submit</a>#}
 {##}
 {#                                    <input class="btn btn-primary" type="submit" value="Submit">#}
-{#                                </div> <!-- card-body.// -->#}
+{#                                </div> #}
 {#                            </div>#}
-{#                        </article> <!-- card-group-item.// -->#}
-{#                        #}
-                    </div> <!-- card.// -->
+{#                        </article> #}
+{#                        #}-->
+                    </div>
                 </form>
             </div>
 
@@ -130,14 +127,25 @@
                                 <div class="card-header">
                                     <strong>{{ post.title }}</strong>
                                 </div>
-                                <div class="card-body">
-                                    <p class="card-text">{{ post.comment }}</p>
-                                    <p class="card-text"><i id="icon"
-                                                            class="far fa-calendar-alt"></i> {{ post.event_date.date }}</p>
-                                    <p class="card-text"><i id="icon"
-                                                            class="fas fa-map-marker-alt"></i> {{ post.location }}</p>
-                                    <a href="{% url 'boards:detail' post.id %}" class="btn btn-success">Details</a>
-                                </div>
+                                <div class="container">
+                                  <div class="row">
+                                    <div class="col">
+                                        <div class="card-body">
+                                            <p class="card-text">{{ post.comment }}</p>
+                                            <p class="card-text"><b>Budget: </b>${{ post.budget }}</p>
+                                            <p class="card-text">Closing on {{ post.end_date.date }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card-body">
+                                            <p class="card-text"><i id="icon"
+                                                                    class="far fa-calendar-alt"></i> {{ post.event_date.date }}</p>
+                                            <p class="card-text"><i id="icon"
+                                                                    class="fas fa-map-marker-alt"></i> {{ post.location }}</p>
+                                            <a href="{% url 'boards:detail' post.id %}" class="btn btn-success">Details</a>
+                                        </div>
+                                    </div>
+                                  </div>
                             </div>
                         {% endfor %}
                     </div>
@@ -146,17 +154,6 @@
                 {% endif %}
             </div>
         </div>
-        <!-- <div class="row">
-          <div class="col">
-            1 of 3
-          </div>
-          <div class="col">
-            2 of 3
-          </div>
-          <div class="col">
-            3 of 3
-          </div>
-        </div> -->
     </div>
 
 {% endblock %}

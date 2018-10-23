@@ -95,7 +95,7 @@ def validate_positive(value):
 
 
 class OptionsForm(forms.Form):
-    sort_option = forms.ChoiceField(choices=SORT_BY, widget=forms.RadioSelect(), required=False)
-    min_value = forms.FloatField(min_value=0, max_value=100000, required=False, validators=[validate_positive])
-    max_value = forms.FloatField(min_value=0, max_value=100000, required=False, validators=[validate_positive])
-    time_range = forms.ChoiceField(choices=TIME_FILTER, widget=forms.RadioSelect(), required=False)
+    sort_option = forms.ChoiceField(label = 'Sort By', choices=SORT_BY, widget=forms.RadioSelect(attrs={'style' : 'margin-right: 10px'}), required=False)
+    min_value = forms.FloatField(min_value=0, max_value=100000, required=False, validators=[validate_positive], widget=forms.TextInput(attrs={ 'class' : 'budgetRange'}))
+    max_value = forms.FloatField(min_value=0, max_value=100000, required=False, validators=[validate_positive], widget=forms.TextInput(attrs={ 'class' : 'budgetRange'}))
+    time_range = forms.ChoiceField(label = 'Date', choices=TIME_FILTER, widget=forms.RadioSelect(attrs={'style' : 'margin-right: 10px'}), required=False)

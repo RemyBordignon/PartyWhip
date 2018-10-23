@@ -103,6 +103,10 @@ jumbotron {
     height:100px;
 }
 
+.budgetRange {
+    width: 60%
+}
+
 #inputRange{
     position:relative;
     top:50%;
@@ -170,15 +174,3 @@ jumbotron {
 #my-title {
     font-weight: bold;
 }
-
-
-
-
-
-
-
-
-
-
-
-
