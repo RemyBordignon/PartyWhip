@@ -7,10 +7,13 @@ Posts
 {% block content %}
 
 <!-- Search bar -->
-<form type="get" action="{% url 'boards:search' %}" style="margin: 0">
-    <input  class="form-control mt-3 mb-3" type="search" placeholder="Search Postings" aria-label="Search" id="search_box" name="search_box" >
-    <button id="search_submit" type="submit" >Submit</button>
-</form>
+<div class="search-container">
+    <form type="get" action="{% url 'boards:search' %}" style="margin: 15px" class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search Postings..." aria-label="Search" id="search_box" name="search_box" style="width: 91.6%">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search_submit">Search</button>
+        <!-- <button type="submit" id="search_submit"><i class="fa fa-search"></i></button> -->
+  </form>
+</div>
 
 <div class="container">
   <div class="row">
@@ -23,7 +26,6 @@ Posts
       		</header>
       		<div class="filter-content">
       			<div class="card-body">
-      			<form>
       				<label class="form-check">
       				  <input class="form-check-input" type="checkbox" id = "mostrecent">
       				  <span class="form-check-label">
