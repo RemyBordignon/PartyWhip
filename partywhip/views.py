@@ -22,5 +22,5 @@ def signup(request):
             login(request, user)
             return redirect('boards:index')
     else:
-        form = SignUpForm()
+        form = UserCreationForm()
     return render(request, 'partywhip/signup.html', {'form': form})

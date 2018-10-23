@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block content %}
+<h2 id="my-title">You have chosen the following bidder</h2>
+<p>You may contact them using the details below.</p>
+<div class="card bg-light mt-3">
+    <div class="container p-5">
+        {% for bid in post.bid_set.all %}
+            {% if bid.id == bidder %}
+                <div class="card">
+                    <div class="card-header">
+                        <strong><i class="fas fa-user-circle"></i> {{ bid.user }} | ${{bid.price}}</strong>
+                    </div>
+                    <div class="card-body">
+                        <i class="fas fa-address-book"></i>
+                        <p class="card-text">{{ bid.contact_details }}</p>
+                        <i class="fas fa-comments"></i>
+                        <p class="card-text">{{ bid.comment }}</p>
+                    </div>
+                </div>
+                <br>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

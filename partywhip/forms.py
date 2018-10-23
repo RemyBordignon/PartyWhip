@@ -13,15 +13,15 @@ class SignUpForm(UserCreationForm):
         model = User
         help_text = {
             'username': None,
-            'password': None,
+            'password1': None,
             'password2': None,
         }
 
         widgets = {
 
             'username': forms.TextInput(attrs={'placeholder': 'Enter a username'}),
-            'password': forms.TextInput(attrs={'placeholder': 'Enter a password'}),
+            'password1': forms.TextInput(attrs={'placeholder': 'Enter a password'}),
             'password2': forms.TextInput(attrs={'placeholder': 'Confirm your password'})
         }
 
-        exclude = ('groups', 'last_login', 'password', 'is_superuser', 'user_permissions', 'first_name', 'last_name', 'email', 'is_staff', 'is_active', 'date_joined')
+        exclude = ('groups', 'last_login', 'is_superuser', 'user_permissions', 'first_name', 'last_name', 'email', 'is_staff', 'is_active', 'date_joined')

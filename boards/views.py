@@ -139,11 +139,19 @@ def search(request):
     return render(request, 'boards/search.html', context)
 
 @login_required
-def set_winner_selected(request, post_id):
-    p = get_object_or_404(Post, pk=post_id)
-    p.winner_selected = True
-    p.status = "ASSIGNED"
-    p.save()
-    return redirect('/boards/my_posts', request)
+def set_winner_selected(request, bid_id):
+    # print(bid_id)
+    # for bid in Bid.objects.all():
+    #     print(bid.id)
+    b = get_object_or_404(Bid, pk=bid_id)
+    b.post.winner_selected = True
+    b.post.status = "ASSIGNED"
+    b.post.save()
+    b.save()
+    context = {
+        'post': b.post,
+        'bidder': b.id
+    }
+    return render(request, 'boards/winner_selected.html', context)
 
 
