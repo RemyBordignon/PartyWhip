@@ -9,8 +9,9 @@ from boards.models import Post, Bid
 
 
 @login_required
-def index(request):
+def index(request, ):
     post_list = Post.objects.order_by('-pub_date')[:5]
+
     context = {
         'post_list': post_list
     }
@@ -72,4 +73,14 @@ def my_posts(request):
 def my_bids(request):
     bid_list = Bid.objects.filter(user=request.user)
     return render(request, 'boards/my_bids.html', {'bid_list': bid_list})
+
+@login_required
+def search(request):
+    search_query = request.GET.get('search_box', None)
+    search_results = Post.objects.filter(title__contains=search_query)
+
+    context = {
+        'post_list': search_results
+    }
+    return render(request, 'boards/index.html', context)
 
