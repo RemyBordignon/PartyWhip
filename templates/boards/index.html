@@ -21,96 +21,103 @@
                 <form type="get" action=".">
                     <div class="card">
                         <!-- sorting options -->
-                        <article class="card-group-item">
 
-                            <header class="card-header">
-                                <h6 class="title">Sort By</h6>
-                            </header>
-
-                            <div class="filter-content">
-                                <div class="card-body">
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="mostrecent">
-                                        <span class="form-check-label">
-      				                        Most Recent
-      				                    </span>
-                                    </label> <!-- form-check.// -->
-
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="lowestBudget">
-                                        <span class="form-check-label">
-      				                        Lowest Budget
-      				                    </span>
-                                    </label>  <!-- form-check.// -->
-
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="highestbudget">
-                                        <span class="form-check-label">
-      				                        Highest Budget
-      				                    </span>
-                                    </label>  <!-- form-check.// -->
-
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="ascendingdate">
-                                        <span class="form-check-label">
-      				                        Event Date (Ascending)
-      				                    </span>
-                                    </label>  <!-- form-check.// -->
-
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="descendingdate">
-                                        <span class="form-check-label">
-      				                        Event Date (Descending)
-      				                    </span>
-                                    </label>  <!-- form-check.// -->
-                                </div> <!-- card-body.// -->
-                            </div>
-                        </article> <!-- card-group-item.// -->
-
-                        <!-- Filtering options -->
-                        <article class="card-group-item">
-
-                            <header class="card-header">
-                                <h6 class="title">Filter By</h6>
-                            </header>
-
-                            <div class="filter-content">
-                                <div class="card-body">
-                                    <label class="form-check">
-                                        <!-- <input class="form-check-input" type="checkbox">
-                                        <span class="form-check-label"> -->
-                                        Budget
-                                        <div id="rangeBox">
-                                            <div id="inputRange">
-                                                <input type="number" step="1" min="0" max="1000" placeholder="Min" id="minBudget">
-                                                <input type="number" step="1" min="0" max="1000" placeholder="Max" id="maxBudget">
-                                            </div>
-                                        </div>
-                                    </label>
-
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="weekfilter">
-                                        <span class="form-check-label">
-                                            Next Week
-                                        </span>
-                                    </label>
-
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="checkbox" id=monthfilter>
-                                        <span class="form-check-label">
-                                            Next Month
-                                        </span>
-                                    </label>
-
-                                    <input id="search_submit" type="submit" value="submit">
-
+                        <form action="{% url 'boards:index' %}" method="post">
+                            {% csrf_token %}
+                            {{ form }}
+                            <input type="submit" value="Submit">
+                        </form>
+{#                        <article class="card-group-item">#}
+{##}
+{#                            <header class="card-header">#}
+{#                                <h6 class="title">Sort By</h6>#}
+{#                            </header>#}
+{##}
+{#                            <div class="filter-content">#}
+{#                                <div class="card-body">#}
+{#                                    <label class="form-check">#}
+{#                                        <input class="form-check-input" type="checkbox" id="mostrecent">#}
+{#                                        <span class="form-check-label">#}
+{#      				                        Most Recent#}
+{#      				                    </span>#}
+{#                                    </label> <!-- form-check.// -->#}
+{##}
+{#                                    <label class="form-check">#}
+{#                                        <input class="form-check-input" type="checkbox" id="lowestBudget">#}
+{#                                        <span class="form-check-label">#}
+{#      				                        Lowest Budget#}
+{#      				                    </span>#}
+{#                                    </label>  <!-- form-check.// -->#}
+{##}
+{#                                    <label class="form-check">#}
+{#                                        <input class="form-check-input" type="checkbox" id="highestbudget">#}
+{#                                        <span class="form-check-label">#}
+{#      				                        Highest Budget#}
+{#      				                    </span>#}
+{#                                    </label>  <!-- form-check.// -->#}
+{##}
+{#                                    <label class="form-check">#}
+{#                                        <input class="form-check-input" type="checkbox" id="ascendingdate">#}
+{#                                        <span class="form-check-label">#}
+{#      				                        Event Date (Ascending)#}
+{#      				                    </span>#}
+{#                                    </label>  <!-- form-check.// -->#}
+{##}
+{#                                    <label class="form-check">#}
+{#                                        <input class="form-check-input" type="checkbox" id="descendingdate">#}
+{#                                        <span class="form-check-label">#}
+{#      				                        Event Date (Descending)#}
+{#      				                    </span>#}
+{#                                    </label>  <!-- form-check.// -->#}
+{#                                </div> <!-- card-body.// -->#}
+{#                            </div>#}
+{#                        </article> <!-- card-group-item.// -->#}
+{##}
+{#                        <!-- Filtering options -->#}
+{#                        <article class="card-group-item">#}
+{##}
+{#                            <header class="card-header">#}
+{#                                <h6 class="title">Filter By</h6>#}
+{#                            </header>#}
+{##}
+{#                            <div class="filter-content">#}
+{#                                <div class="card-body">#}
+{#                                    <label class="form-check">#}
+{#                                        <!-- <input class="form-check-input" type="checkbox">#}
+{#                                        <span class="form-check-label"> -->#}
+{#                                        Budget#}
+{#                                        <div id="rangeBox">#}
+{#                                            <div id="inputRange">#}
+{#                                                <input type="number" step="1" min="0" max="1000" placeholder="Min" id="minBudget">#}
+{#                                                <input type="number" step="1" min="0" max="1000" placeholder="Max" id="maxBudget">#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </label>#}
+{##}
+{#                                    <label class="form-check">#}
+{#                                        <input class="form-check-input" type="checkbox" id="weekfilter">#}
+{#                                        <span class="form-check-label">#}
+{#                                            Next Week#}
+{#                                        </span>#}
+{#                                    </label>#}
+{##}
+{#                                    <label class="form-check">#}
+{#                                        <input class="form-check-input" type="checkbox" id=monthfilter>#}
+{#                                        <span class="form-check-label">#}
+{#                                            Next Month#}
+{#                                        </span>#}
+{#                                    </label>#}
+{##}
+{#                                    <input id="search_submit" type="submit" value="submit">#}
+{##}
 {#                                    <a href="{% url 'boards:index' %}" class="btn btn-primary active" role="button"#}
 {#                                       aria-pressed="true">Submit</a>#}
 {##}
 {#                                    <input class="btn btn-primary" type="submit" value="Submit">#}
-                                </div> <!-- card-body.// -->
-                            </div>
-                        </article> <!-- card-group-item.// -->
+{#                                </div> <!-- card-body.// -->#}
+{#                            </div>#}
+{#                        </article> <!-- card-group-item.// -->#}
+{#                        #}
                     </div> <!-- card.// -->
                 </form>
             </div>
