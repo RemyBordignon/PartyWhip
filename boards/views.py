@@ -1,6 +1,7 @@
 import datetime
 
 from django import forms
+from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -16,11 +17,10 @@ from boards.models import Post, Bid
 @login_required
 def index(request):
     options_form = OptionsForm(data=request.POST)
-    post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
 
     if not options_form.is_valid():
         options_form = OptionsForm()
-        post_list = Post.objects.order_by('-pub_date')
+        post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
     else:
         print(request.GET.get('sort_option'))
         sort_by = request.GET.get('sort_option')
@@ -28,28 +28,26 @@ def index(request):
         max_value = request.GET.get('max_value')
         time_range = request.GET.get('time_range')
 
-        if sort_by is None and min_value is None and max_value is None and time_range is None:
-            pass
-
-        # TODO needs validation
+        if min_value is not None and max_value is not None and min_value > max_value:
+            options_form.add_error('max_value', "Enter Valid Budget Range")
 
         # SORT?
         if sort_by is not None:
             # WE WILL INSERT DAFNY SORTS HERE
             if sort_by == 'most_recent':
-                post_list = Post.objects.order_by('-pub_date')
+                post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
             elif sort_by == 'budget_ascending':
-                post_list = Post.objects.order_by('budget')
+                post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('budget')
             elif sort_by == 'budget_descending':
-                post_list = Post.objects.order_by('-budget')
+                post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-budget')
             elif sort_by == 'event_date_ascending':
-                post_list = Post.objects.order_by('event_date')
+                post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('event_date')
             elif sort_by == 'event_date_descending':
-                post_list = Post.objects.order_by('-event_date')
+                post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-event_date')
             else:
                 post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
         elif min_value is not None and max_value is not None and min_value < max_value:
-            post_list = Post.objects.filter(budget__gte=min_value,
+            post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).filter(budget__gte=min_value,
                                             budget__lte=max_value)
         elif time_range is not None:
             if time_range == 'this_week':
@@ -62,7 +60,7 @@ def index(request):
                 month = datetime.timedelta(days=30)
                 post_list = Post.objects.filter(event_date__lt=(today + month), event_date__gte=datetime.datetime.now())
         else:
-            pass
+            post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
 
     context = {
         'post_list': post_list,

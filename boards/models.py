@@ -3,6 +3,7 @@ from datetime import timezone, datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
 
 
 class Post(models.Model):
@@ -20,6 +21,10 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def clean(self):
+        # Don't allow draft entries to have a pub_date.
+        if self.end_date > self.event_date:
+            raise ValidationError(('Bidding close must be before event date.'))
 
 class Bid(models.Model):
     user = models.CharField(max_length=200)
