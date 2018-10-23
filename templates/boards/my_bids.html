@@ -12,7 +12,15 @@ My Bids
     {% for bid in bid_list %}
     <div class="card mt-3 mb-3">
         <div class="card-header">
-            <strong>{{bid.post.title}}</strong>
+            <strong>{{bid.post.title}} |
+                {% if bid.post.status == "OPEN" %}
+                    <p id="status-open">{{ bid.post.status }}</p>
+                {% elif bid.post.status == "CLOSED" %}
+                    <p id="status-closed">{{ bid.post.status }}</p>
+                {% elif bid.post.status == "ASSIGNED" %}
+                    <p id="status-assigned">{{ bid.post.status }}</p>
+                {% endif %}
+            </strong>
         </div>
         <div class="card-body">
             <p class="card-text">{{bid.post.comment}}</p>
