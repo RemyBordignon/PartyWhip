@@ -76,3 +76,49 @@ jumbotron {
 #bid-button {
     width: 125px;
 }
+
+
+
+Here is a link to a price slider range.
+
+1)Price Slider Shopping Carts(Visit this link)
+
+HTML
+
+   <div id="rangeBox">
+         <div id="sliderBox">
+             <input type="range" id="slider0to50" step="5" min="0" max="50">
+             <input type="range" id="slider51to100" step="5" min="50" max="100">
+         </div>
+         <div id="inputRange">
+             <input type="number" step="5" min="0" max="50" placeholder="Min" id="min" >
+             <input type="number" step="5" min="51" max="100" placeholder="Max" id="max">
+         </div>
+    </div>
+CSS
+
+#rangeBox{ /* carry complete  range box*/
+    width:300px;
+    height:100px;
+}
+
+#inputRange{
+    position:relative;
+    top:50%;
+}
+
+#inputRange::after{
+    content:"";
+    clear:both;
+    display:block
+}
+
+#inputRange #minBudget{
+     width:40%;
+    float:left;
+}
+
+#inputRange #maxBudget{
+     width:40%;
+    float:right;
+}

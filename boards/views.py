@@ -71,4 +71,3 @@ def my_posts(request):
 def my_bids(request):
     bid_list = Bid.objects.filter(user=request.user)
     return render(request, 'boards/my_bids.html', {'bid_list': bid_list})
-
