@@ -42,6 +42,7 @@ def create_post(request):
     if request.method == "POST":
         # use this to add users to DB TABLE TODO
         post = Post(user=request.user, pub_date=timezone.localtime(), winner_selected=False)
+        post = Post(user=request.user, pub_date=timezone.localtime(), winner_selected=False, )
         form = PostForm(instance=post, data=request.POST)
         if form.is_valid():
             form.save()
@@ -78,6 +79,14 @@ def my_bids(request):
     bid_list = Bid.objects.filter(user=request.user)
     return render(request, 'boards/my_bids.html', {'bid_list': bid_list})
 
+@login_required
+def search(request):
+    search_query = request.GET.get('search_box', None)
+    search_results = Post.objects.filter(title__contains=search_query)
+    context = {
+        'post_list': search_results
+    }
+    return render(request, 'boards/index.html', context)
 
 @login_required
 def set_winner_selected(request, post_id):
