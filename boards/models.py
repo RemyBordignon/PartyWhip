@@ -2,7 +2,9 @@ from datetime import timezone, datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 
 
 class Post(models.Model):
@@ -17,8 +19,17 @@ class Post(models.Model):
     winner_selected = models.BooleanField(default=False)
     status = models.CharField(max_length=10, default="OPEN")
 
+
     def __str__(self):
         return self.title
+
+    def clean_fields(self, exclude=None):
+        super().clean_fields(exclude=exclude)
+        print(self.end_date)
+        if self.end_date >= self.event_date:
+            raise ValidationError("Invalid Date: the Event Date must be after the End Date")
+        if self.end_date <= timezone.now() or self.event_date <= timezone.now():
+            raise ValidationError("Invalid Date: the date you have chosen has passed")
 
 
 class Bid(models.Model):

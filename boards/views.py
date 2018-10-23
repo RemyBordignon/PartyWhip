@@ -11,7 +11,7 @@ from boards.models import Post, Bid
 
 @login_required
 def index(request):
-    post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')[:5]
+    post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
     context = {
         'post_list': post_list
     }
