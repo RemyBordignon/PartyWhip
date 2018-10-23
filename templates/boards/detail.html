@@ -59,7 +59,7 @@
                 <strong><i class="fas fa-user-circle"></i> {{ bid.user }} | ${{bid.price}}</strong>
                 {% if post.status == "CLOSED" %}
                     {% if post.user == user.username %}
-                        <form action="{% url 'boards:winner_selected' post_id=post.id %}">
+                        <form action="{% url 'boards:winner_selected' bid_id=bid.id %}">
                             {% if post.winner_selected == False %}
                                 <button id="winner-selected-button" class="btn btn-success btn-sm" >Choose This Bidder</button>
                             {% endif %}

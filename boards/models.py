@@ -20,7 +20,6 @@ class Post(models.Model):
     winner_selected = models.BooleanField(default=False)
     status = models.CharField(max_length=10, default="OPEN")
 
-
     def __str__(self):
         return self.title
 
