@@ -54,7 +54,7 @@ class PostForm(ModelForm):
             'title': forms.TextInput(attrs={'placeholder': 'Enter a title'}),
             'budget': forms.TextInput(attrs={'placeholder': 'Enter your budget'}),
             'location': forms.TextInput(attrs={'placeholder':'Enter a suburb'}),
-            'comment': forms.TextInput(attrs={'placeholder':'Enter any extra information'}),
+            'comment': forms.Textarea(attrs={'placeholder':'Extra information (e.g. number of guests, occasion, type of venue, cooking facilities)'}),
 
         }
 
