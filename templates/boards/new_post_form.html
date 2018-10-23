@@ -7,7 +7,7 @@ New Post
 
 
 {% block content %}
-    <form method="post" action="{% url 'boards:create_post' %}">
+    <form method="post" action="{% url 'boards:create_post' post_id %}">
         {{ form | crispy}}
 
         {% csrf_token %}

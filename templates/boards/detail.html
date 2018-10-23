@@ -38,7 +38,7 @@
                         </div>
                         <div class="card-body">
                             <p id="budget">${{ post.budget }}</p>
-                            <a href="{% url 'boards:create_bid' %}">
+                            <a href="{% url 'boards:create_bid' post_id=post.id %}">
                                 {% if post.status != "OPEN" %}
                                     <button id="bid-button" class="btn btn-success btn-sm" disabled>Create Bid</button>
                                 {% else %}
@@ -46,11 +46,7 @@
                                 {% endif %}
                             </a>
                         </div>
-
                     </div>
-
-
-
             </div>
         </div>
     </div>
