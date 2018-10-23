@@ -45,9 +45,9 @@ alert alert-primary {
 }
 
 .welcomeFeature {
-    background-image: url(../images/welcome.jpg); 
-    background-size: cover; 
-    height: 500px; 
+    background-image: url(../images/welcome.jpg);
+    background-size: cover;
+    height: 500px;
     width:auto
 }
 #post-title {
@@ -76,21 +76,3 @@ jumbotron {
 #bid-button {
     width: 125px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
