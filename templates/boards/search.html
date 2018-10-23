@@ -1,0 +1,49 @@
+{% extends "../base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Posts
+{% endblock %}
+
+{% block content %}
+
+<!-- Search bar -->
+<div class="search-container">
+    <form type="get" action="{% url 'boards:search' %}" style="margin: 15px" class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="{{ search_term }}" aria-label="Search" id="search_box" name="search_box" style="width: 91.6%">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search_submit">Search</button>
+        <!-- <button type="submit" id="search_submit"><i class="fa fa-search"></i></button> -->
+  </form>
+</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {% if post_list %}
+                    <div class="alert alert-success" role="alert">Search Results for {{ search_term }}</div>
+
+                    <div>
+                        {% for post in post_list %}
+                            <div class="card mt-3 mb-3">
+                                <div class="card-header">
+                                    <strong>{{ post.title }}</strong>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">{{ post.comment }}</p>
+                                    <p class="card-text"><i id="icon"
+                                                            class="far fa-calendar-alt"></i> {{ post.event_date.date }}</p>
+                                    <p class="card-text"><i id="icon"
+                                                            class="fas fa-map-marker-alt"></i> {{ post.location }}</p>
+                                    <a href="{% url 'boards:detail' post.id %}" class="btn btn-success">Details</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-secondary" role="alert">No Search Results for {{ search_term }}</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

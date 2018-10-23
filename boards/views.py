@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-
+from django.db.models import Q
 
 # Create your views here.
 from boards.forms import PostForm, BidForm, OptionsForm
@@ -131,11 +131,12 @@ def my_bids(request):
 @login_required
 def search(request):
     search_query = request.GET.get('search_box', None)
-    search_results = Post.objects.filter(title__contains=search_query)
+    search_results = Post.objects.filter(Q(title__contains=search_query)|Q(location__contains=search_query))
     context = {
-        'post_list': search_results
+        'post_list': search_results,
+        'search_term': search_query,
     }
-    return render(request, 'boards/index.html', context)
+    return render(request, 'boards/search.html', context)
 
 @login_required
 def set_winner_selected(request, post_id):

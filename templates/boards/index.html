@@ -7,14 +7,14 @@
 
 {% block content %}
 
-<!-- Search bar -->
-<div class="search-container">
-    <form type="get" action="{% url 'boards:search' %}" style="margin: 15px" class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search Postings..." aria-label="Search" id="search_box" name="search_box" style="width: 91.6%">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search_submit">Search</button>
-        <!-- <button type="submit" id="search_submit"><i class="fa fa-search"></i></button> -->
-  </form>
-</div>
+    <!-- Search bar -->
+    <div class="search-container">
+        <form type="get" action="{% url 'boards:search' %}" style="margin: 15px" class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search Postings..." aria-label="Search" id="search_box" name="search_box" style="width: 91.6%">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search_submit">Search</button>
+            <!-- <button type="submit" id="search_submit"><i class="fa fa-search"></i></button> -->
+      </form>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -24,7 +24,7 @@
                         <!-- sorting options -->
                         <form action="{% url 'boards:index' %}" method="post">
                             {% csrf_token %}
-                            {{ form | crispy}}
+                            {{ form | crispy }}
                             <input type="submit" value="Apply">
                         </form>
 {#                        <article class="card-group-item">#}
