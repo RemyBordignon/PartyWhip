@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from django import forms
 
 from boards.models import Post, Bid
+from django.contrib.auth.models import User
 
 
 class DateInput(forms.DateInput):
@@ -32,3 +33,7 @@ class BidForm(ModelForm):
             'contact_details': forms.TextInput(attrs={'placeholder': 'Enter contact details'})
         }
         exclude = ('user', 'post')
+
+
+
+
