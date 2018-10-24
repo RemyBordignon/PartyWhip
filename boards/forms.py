@@ -54,7 +54,7 @@ class PostForm(ModelForm):
             'title': forms.TextInput(attrs={'placeholder': 'Enter a title'}),
             'budget': forms.TextInput(attrs={'placeholder': 'Enter your budget'}),
             'location': forms.TextInput(attrs={'placeholder':'Enter a suburb'}),
-            'comment': forms.Textarea(attrs={'placeholder':'Extra information (e.g. number of guests, occasion, type of venue, cooking facilities)'}),
+            'comment': forms.Textarea(attrs={'placeholder':'Extra information (e.g. number of guests, occasion, type of venue, cooking facilities)', 'style': 'height: 180px'}),
 
         }
 
@@ -80,8 +80,8 @@ SORT_BY= [
     ('budget_ascending', 'Budget (Ascending)'),
     ('budget_descending', 'Budget (Descending)'),
     ('event_date_descending', 'Event Date (Descending)'),
-    ('event_date_ascending', 'Event Date (Ascending)'),
-    ]
+    ('event_date_ascending', 'Event Date (Ascending)'),    
+]
 
 TIME_FILTER = [
     ('this_week', 'This Week'),

@@ -12,7 +12,7 @@ My Bids
     {% for bid in bid_list %}
     <div class="card mt-3 mb-3">
         <div class="card-header">
-            <strong>{{bid.post.title}} |
+            <strong>{{bid.post.title}} | <span style="font-weight:normal" class="text-muted"> <i class="fas fa-user-circle"></i> {{ bid.post.user }}</span> |
                 {% if bid.post.status == "OPEN" %}
                     <p id="status-open">{{ bid.post.status }}</p>
                 {% elif bid.post.status == "CLOSED" %}
@@ -29,7 +29,7 @@ My Bids
               <div class="row">
                 <div class="col">
                     <div class="card-body" style="padding: 5px">
-                        <p class="card-text"><i class="fas fa-dollar-sign"></i>{{ bid.post.budget }}</p>
+                        <p class="card-text"><i id="icon" class="fas fa-dollar-sign"></i>{{ bid.post.budget }}</p>
                         <p class="card-text">Closing on {{bid.post.end_date.date }}</p>
                     </div>
                 </div>

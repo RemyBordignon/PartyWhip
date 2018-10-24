@@ -131,15 +131,16 @@
                         {% for post in post_list %}
                             <div class="card mt-3 mb-3">
                                 <div class="card-header">
-                                    <strong>{{ post.title }}</strong>
                                     <a href="{% url 'boards:detail' post.id %}" class="card-link" style="float: right">Details</a>
+                                    <strong>{{ post.title }} | <span style="font-weight:normal" class="text-muted"> <i class="fas fa-user-circle"></i> {{ post.user }}</span></strong>
+                                     <!-- <h6>{{ post.user }}</h6> -->
                                 </div>
                                 <div class="container">
                                     <p class="card-text" style="margin-top: 20px; margin-right: 15px; margin-left : 20px; margin-bottom: 0px">{{ post.comment }}</p>
                                   <div class="row">
                                     <div class="col">
                                         <div class="card-body">
-                                            <p class="card-text"><i class="fas fa-dollar-sign"></i>{{ post.budget }}</p>
+                                            <p class="card-text"><i class="fas fa-dollar-sign" id="icon"></i>{{ post.budget }}</p>
                                             <p class="card-text">Closing on {{ post.end_date.date }}</p>
                                         </div>
                                     </div>
