@@ -10,8 +10,8 @@
     <!-- Search bar -->
     <div class="search-container">
         <form type="get" action="{% url 'boards:search' %}" style="margin: 15px" class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search Postings..." aria-label="Search" id="search_box" name="search_box" style="width: 91.6%">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search_submit">Search</button>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search Postings..." aria-label="Search" id="search_box" name="search_box" style="width: 91%">
+            <button class="btn btn-success" type="submit" id="search_submit">Search</button>
             <!-- <button type="submit" id="search_submit"><i class="fa fa-search"></i></button> -->
       </form>
     </div>
@@ -20,13 +20,19 @@
         <div class="row">
             <div class="col-3" style="padding-top: 16px">
                 <form type="get" action=".">
-                    <div class="card" style="padding: 20px">
+                    <div class="card">
+                        <header class="card-header" style="padding:5px">
+                            <h6 class="title"><b>Sort By</b></h6>
+                        </header>
                         <!-- sorting options -->
-                        <form action="{% url 'boards:index' %}" method="post">
-                            {% csrf_token %}
-                            {{ form | crispy }}
-                            <input class="btn btn-success" type="submit" value="Apply">
-                        </form>
+                        <div  style="padding: 20px" >
+                            <form action="{% url 'boards:index' %}" method="post">
+                                {% csrf_token %}
+                                {{ form | crispy}}
+                                <!-- {{ form | crispy }} -->
+                                <input class="btn btn-success" type="submit" value="Apply" style="width: 80%; margin-left: 24px">
+                            </form>
+                        </div>
 <!-- {#                        <article class="card-group-item">#}
 {##}
 {#                            <header class="card-header">#}
@@ -126,12 +132,13 @@
                             <div class="card mt-3 mb-3">
                                 <div class="card-header">
                                     <strong>{{ post.title }}</strong>
+                                    <a href="{% url 'boards:detail' post.id %}" class="card-link" style="float: right">Details</a>
                                 </div>
                                 <div class="container">
+                                    <p class="card-text" style="margin-top: 20px; margin-right: 15px; margin-left : 20px; margin-bottom: 0px">{{ post.comment }}</p>
                                   <div class="row">
                                     <div class="col">
                                         <div class="card-body">
-                                            <p class="card-text">{{ post.comment }}</p>
                                             <p class="card-text"><b>Budget: </b>${{ post.budget }}</p>
                                             <p class="card-text">Closing on {{ post.end_date.date }}</p>
                                         </div>
@@ -142,17 +149,16 @@
                                                                     class="far fa-calendar-alt"></i> {{ post.event_date.date }}</p>
                                             <p class="card-text"><i id="icon"
                                                                     class="fas fa-map-marker-alt"></i> {{ post.location }}</p>
-                                            <a href="{% url 'boards:detail' post.id %}" class="btn btn-success">Details</a>
                                         </div>
                                     </div>
                                   </div>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
                 {% else %}
                     <p>No posts available</p>
                 {% endif %}
-            </div>
         </div>
     </div>
 
