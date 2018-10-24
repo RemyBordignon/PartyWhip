@@ -26,7 +26,10 @@ def index(request):
         sort_by = request.GET.get('sort_option')
         min_value = request.GET.get('min_value')
         max_value = request.GET.get('max_value')
-        time_range = request.GET.get('time_range')
+
+        if sort_by is not None and (min_value is not None or max_value is not None):
+            options_form.add_error('sort_option', "Select one sorting mechanism")
+
 
         if min_value is not None and max_value is not None and min_value > max_value:
             options_form.add_error('max_value', "Enter Valid Budget Range")
@@ -44,21 +47,25 @@ def index(request):
                 post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('event_date')
             elif sort_by == 'event_date_descending':
                 post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-event_date')
+            elif sort_by == 'this_week':
+                today = datetime.datetime.now()
+                week = datetime.timedelta(days=7)
+                post_list = Post.objects.filter(event_date__lt=(today + week),
+                                                    event_date__gte=datetime.datetime.now())
+            elif sort_by == 'this_month':
+                today = datetime.datetime.now()
+                month = datetime.timedelta(days=30)
+                post_list = Post.objects.filter(event_date__lt=(today + month),
+                                                    event_date__gte=datetime.datetime.now())
             else:
                 post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
         elif min_value is not None and max_value is not None and min_value < max_value:
             post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).filter(budget__gte=min_value,
                                             budget__lte=max_value)
-        elif time_range is not None:
-            if time_range == 'this_week':
-                today = datetime.datetime.now()
-                week = datetime.timedelta(days=7)
-                post_list = Post.objects.filter(event_date__lt=(today + week), event_date__gte=datetime.datetime.now())
-                print(today + week)
-            elif time_range == 'this_month':
-                today = datetime.datetime.now()
-                month = datetime.timedelta(days=30)
-                post_list = Post.objects.filter(event_date__lt=(today + month), event_date__gte=datetime.datetime.now())
+        elif min_value is not None and max_value is None:
+            post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).filter(budget__gte=min_value)
+        elif max_value is not None and min_value is None:
+            post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).filter(budget__lte=max_value)
         else:
             post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
 
