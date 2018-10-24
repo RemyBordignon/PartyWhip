@@ -26,33 +26,30 @@
                 <p><i id="icon" class="fas fa-map-marker-alt"></i> &nbsp{{ post.location }}</p>
                 <br>
                 <strong>Details</strong>
-                <p id="description"> {{ post.comment }} </p>
+                <p> {{ post.comment }} </p>
             </div>
-
-            <div class="card bg-light mt-3">
-                    <div class="card" id="budget-card">
-                        <div class="card-header">
-                        <h5 id="budget-header">Budget</h5>
-                        </div>
-                        <div class="card-body">
-                            <p id="budget">${{ post.budget }}</p>
-                            <a href="{% url 'boards:create_bid' post_id=post.id %}">
-                                {% if post.status != "OPEN" or post.user == user.username %}
-                                    <button id="bid-button" class="btn btn-success btn-sm" disabled>Create Bid</button>
-                                {% else %}
-                                    <button id="bid-button" class="btn btn-success btn-sm" >Create Bid</button>
-                                {% endif %}
-                            </a>
-                        </div>
+                <div class="card" id="budget-card">
+                    <div class="card-header">
+                    <h5 id="budget-header">Budget</h5>
                     </div>
-            </div>
+                    <div class="card-body">
+                        <p id="budget">${{ post.budget }}</p>
+                        <a href="{% url 'boards:create_bid' post_id=post.id %}">
+                            {% if post.status != "OPEN" or post.user == user.username %}
+                                <button id="bid-button" class="btn btn-success btn-sm" disabled>Create Bid</button>
+                            {% else %}
+                                <button id="bid-button" class="btn btn-success btn-sm" >Create Bid</button>
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
 
 <div class="card bg-light mt-3">
     <div class="container p-5">
-        <h3 align="center">Current Bids</h3>
+        <h3 align="center" style="margin-bottom:30px">Current Bids</h3>
         {% for bid in post.bid_set.all %}
         <div class="card">
             <div class="card-header">

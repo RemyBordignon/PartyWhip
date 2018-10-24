@@ -21,18 +21,36 @@ My Bids
                     <p id="status-assigned">{{ bid.post.status }}</p>
                 {% endif %}
             </strong>
+            <a href="{% url 'boards:detail' bid.post.id %}" class="card-link" style="float: right">Details</a>
         </div>
         <div class="card-body">
-            <p class="card-text">{{bid.post.comment}}</p>
-            <p class="card-text"><i id="icon" class="far fa-calendar-alt"></i> {{bid.post.event_date.date}}</p>
-            <p class="card-text"><i id="icon" class="fas fa-map-marker-alt"></i> {{bid.post.location}}</p>
-            <a href="{% url 'boards:detail' bid.post.id %}" class="btn btn-success">Details</a>
+            <div class="container">
+                <p class="card-text">{{bid.post.comment}}</p>
+              <div class="row">
+                <div class="col">
+                    <div class="card-body" style="padding: 5px">
+                        <p class="card-text"><i class="fas fa-dollar-sign"></i>{{ bid.post.budget }}</p>
+                        <p class="card-text">Closing on {{bid.post.end_date.date }}</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-body">
+                        <p class="card-text"><i id="icon"
+                                                class="far fa-calendar-alt"></i> {{ bid.post.event_date.date }}</p>
+                        <p class="card-text"><i id="icon"
+                                                class="fas fa-map-marker-alt"></i> {{ bid.post.location }}</p>
+                    </div>
+                </div>
+              </div>
+            </div>
             <hr>
-            <strong>My Bid | ${{bid.price}}</strong>
-            <br>
-            <br>
-            <p class="card-text"><i class="fas fa-address-book"></i> {{ bid.contact_details }}</p>
-            <p class="card-text"><i class="fas fa-comments"></i> {{ bid.comment }}</p>
+            <div class="card-body">
+                <strong>My Bid | ${{bid.price}}</strong>
+                <br>
+                <br>
+                <p class="card-text"><i class="fas fa-address-book"></i> {{ bid.contact_details }}</p>
+                <p class="card-text"><i class="fas fa-comments"></i> {{ bid.comment }}</p>
+            </div>
         </div>
     </div>
     {% endfor %}

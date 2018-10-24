@@ -8,29 +8,41 @@ My Posts
 
 {% if post_list %}
 <h2 id="my-title">My Posts</h2>
-<div>
     {% for post in post_list %}
-    <div class="card mt-3 mb-3">
-        <div class="card-header">
-            <strong>{{post.title}} |
-                {% if post.status == "OPEN" %}
-                    <p id="status-open">{{ post.status }}</p>
-                {% elif post.status == "CLOSED" %}
-                    <p id="status-closed">{{ post.status }}</p>
-                {% elif post.status == "ASSIGNED" %}
-                    <p id="status-assigned">{{ post.status }}</p>
-                {% endif %}
-            </strong>
+        <div class="card mt-3 mb-3">
+            <div class="card-header">
+                <strong>{{post.title}} |
+                    {% if post.status == "OPEN" %}
+                        <p id="status-open">{{ post.status }}</p>
+                    {% elif post.status == "CLOSED" %}
+                        <p id="status-closed">{{ post.status }}</p>
+                    {% elif post.status == "ASSIGNED" %}
+                        <p id="status-assigned">{{ post.status }}</p>
+                    {% endif %}
+                </strong>
+                <a href="{% url 'boards:detail' post.id %}" class="card-link" style="float: right">Details</a>
+            </div>
+            <div class="container">
+                <p class="card-text" style="margin-top: 20px; margin-right: 15px; margin-left : 20px; margin-bottom: 0px">{{ post.comment }}</p>
+              <div class="row">
+                <div class="col">
+                    <div class="card-body">
+                        <p class="card-text"><i class="fas fa-dollar-sign"></i>{{ post.budget }}</p>
+                        <p class="card-text">Closing on {{ post.end_date.date }}</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-body">
+                        <p class="card-text"><i id="icon"
+                                                class="far fa-calendar-alt"></i> {{ post.event_date.date }}</p>
+                        <p class="card-text"><i id="icon"
+                                                class="fas fa-map-marker-alt"></i> {{ post.location }}</p>
+                    </div>
+                </div>
+              </div>
+            </div>
         </div>
-        <div class="card-body">
-            <p class="card-text">{{post.comment}}</p>
-            <p class="card-text"><i id="icon" class="far fa-calendar-alt"></i> {{post.event_date.date}}</p>
-            <p class="card-text"><i id="icon" class="fas fa-map-marker-alt"></i> {{post.location}}</p>
-            <a href="{% url 'boards:detail' post.id %}" class="btn btn-success">Details</a>
-        </div>
-    </div>
     {% endfor %}
-</div>
 {% else %}
 <p>No posts available</p>
 {% endif %}
