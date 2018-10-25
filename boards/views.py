@@ -159,4 +159,12 @@ def set_winner_selected(request, bid_id):
     }
     return render(request, 'boards/winner_selected.html', context)
 
+@login_required
+def delete_post(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    post.delete()
+
+    post_list = Post.objects.filter(user=request.user).order_by('-pub_date')
+    return render(request, 'boards/my_posts.html', {'post_list': post_list})
+
 
