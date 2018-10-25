@@ -11,7 +11,7 @@ from django.db.models import Q
 # Create your views here.
 from boards.forms import PostForm, BidForm, OptionsForm
 from boards.models import Post, Bid
-from boards.Sort import Sort
+from boards.sort import Sort
 
 
 @login_required
@@ -35,7 +35,7 @@ def index(request):
 
         if sort_by is not None:
             sort = Sort()
-            post_list = Post.objects.exclude(end_date__lte=timezone.localtime())
+            post_list = list(Post.objects.exclude(end_date__lte=timezone.localtime()))
             # DAFNY SORTS HERE
             if sort_by == 'most_recent':
                 post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
