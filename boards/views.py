@@ -11,7 +11,7 @@ from django.db.models import Q
 # Create your views here.
 from boards.forms import PostForm, BidForm, OptionsForm
 from boards.models import Post, Bid
-from boards.sort import Sort
+from boards.Sort import Sort
 
 
 @login_required
