@@ -21,7 +21,7 @@ My Bids
                     <p id="status-assigned">{{ bid.post.status }}</p>
                 {% endif %}
             </strong>
-            <a href="{% url 'boards:delete_bid' bid.post.id %}" class="card-link mr-2 text-danger" style="float: right">Delete</a>
+            <a href="{% url 'boards:delete_bid' bid.id %}" class="card-link mr-2 text-danger" style="float: right">Delete</a>
             <a href="{% url 'boards:detail' bid.post.id %}" class="card-link mr-2" style="float: right">Details</a>
         </div>
         <div class="card-body">
@@ -49,8 +49,27 @@ My Bids
                 <strong>My Bid | ${{bid.price}}</strong>
                 <br>
                 <br>
-                <p class="card-text"><i class="fas fa-address-book"></i> {{ bid.contact_details }}</p>
-                <p class="card-text"><i class="fas fa-comments"></i> {{ bid.comment }}</p>
+                <div class="row">
+                <div class="col">
+                    <div class="card-body" style="padding: 5px">
+                        <p class="card-text"><i class="fas fa-address-book"></i> {{ bid.contact_details }}</p>
+                        <p class="card-text"><i class="fas fa-comments"></i> {{ bid.comment }}</p>
+                    </div>
+                </div>
+                {% if bid.post.winning_bid == bid.id %}
+                    <div class="col">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <i class="fas fa-check"></i>
+                                <strong id="bid-is-assigned"> You have been assigned this post.</strong>
+                                <br>
+                                The poster will notify you with more information.
+                            </p>
+                        </div>
+                    </div>
+                {% endif %}
+              </div>
+
             </div>
         </div>
     </div>
