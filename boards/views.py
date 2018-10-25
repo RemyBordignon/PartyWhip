@@ -84,18 +84,11 @@ def detail(request, post_id):
         post.status = "CLOSED"
     if post.winner_selected == True:
         post.status = "ASSIGNED"
-
-
-    user_already_bidded = False
-    for bid in Bid.objects.filter(user=request.user,post=post):
-        if bid.user == request.user.username:
-            user_already_bidded = True
-
+        
     post.save()
     context = {
         'post': post,
-        'user': request.user,
-        'user_already_bidded': user_already_bidded
+        'user': request.user
     }
 
     return render(request, 'boards/detail.html', context)
@@ -165,5 +158,22 @@ def set_winner_selected(request, bid_id):
         'bidder': b.id
     }
     return render(request, 'boards/winner_selected.html', context)
+
+@login_required
+def delete_post(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    post.delete()
+
+    post_list = Post.objects.filter(user=request.user).order_by('-pub_date')
+    return render(request, 'boards/my_posts.html', {'post_list': post_list})
+
+@login_required
+def delete_bid(request, bid_id):
+    bid = Bid.objects.get(pk=bid_id)
+    bid.delete()
+
+    bid_list = Bid.objects.filter(user=request.user).order_by('-post__pub_date')
+    return render(request, 'boards/my_bids.html', {'bid_list': bid_list})
+
 
 
