@@ -48,8 +48,27 @@ My Bids
                 <strong>My Bid | ${{bid.price}}</strong>
                 <br>
                 <br>
-                <p class="card-text"><i class="fas fa-address-book"></i> {{ bid.contact_details }}</p>
-                <p class="card-text"><i class="fas fa-comments"></i> {{ bid.comment }}</p>
+                <div class="row">
+                <div class="col">
+                    <div class="card-body" style="padding: 5px">
+                        <p class="card-text"><i class="fas fa-address-book"></i> {{ bid.contact_details }}</p>
+                        <p class="card-text"><i class="fas fa-comments"></i> {{ bid.comment }}</p>
+                    </div>
+                </div>
+                {% if bid.post.winning_bid == bid.id %}
+                    <div class="col">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <i class="fas fa-check"></i>
+                                <strong id="bid-is-assigned"> You have been assigned this post.</strong>
+                                <br>
+                                The poster will notify you with more information.
+                            </p>
+                        </div>
+                    </div>
+                {% endif %}
+              </div>
+
             </div>
         </div>
     </div>
