@@ -40,7 +40,7 @@ def index(request):
             if sort_by == 'most_recent':
                 post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
             elif sort_by == 'budget_ascending':
-                post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('budget')
+                sort.cocktail_budget_ascending(post_list)
             elif sort_by == 'budget_descending':
                 sort.bubble_budget_descending(post_list)
             elif sort_by == 'event_date_ascending':

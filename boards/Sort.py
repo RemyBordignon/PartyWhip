@@ -15,23 +15,23 @@ class Sort:
 		start = 0
 		end = len(post_list) - 1
 
-		# while (start < end):
-		# 	i = start
+		while (start < end):
+			i = start
 
-		# 	while (i < end):
-		# 		if post_list[i].budget > post_list[i+1].budget:
-		# 			list_nums[i], list_nums[i+1] = list_nums[i+1], list_nums[i]
-		# 		i += 1
+			while (i < end):
+				if post_list[i].budget > post_list[i+1].budget:
+					post_list[i], post_list[i+1] = post_list[i+1], post_list[i]
+				i += 1
 
-		# 	end -= 1
-		# 	i = end
+			end -= 1
+			i = end
 
-		# 	while (i > start):
-		# 		if list_nums[i] < list_nums[i-1]:
-		# 			list_nums[i], list_nums[i-1] = list_nums[i-1], list_nums[i]
-		# 		i -= 1
+			while (i > start):
+				if post_list[i].budget < post_list[i-1].budget:
+					post_list[i], post_list[i-1] = post_list[i-1], post_list[i]
+				i -= 1
 
-		# 	start += 1
+			start += 1
 
 	def selection_event_date_ascending(self, post_list):
 		pass
