@@ -124,7 +124,7 @@ def create_bid(request, post_id):
         form = BidForm(instance=bid, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('boards:index')
+            return redirect('boards:detail', post_id)
     else:
         form = BidForm()
     return render(request, "boards/new_bid_form.html", {'form': form, 'post_id': post_id})
