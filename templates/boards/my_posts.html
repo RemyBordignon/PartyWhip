@@ -20,7 +20,8 @@ My Posts
                         <p id="status-assigned">{{ post.status }}</p>
                     {% endif %}
                 </strong>
-                <a href="{% url 'boards:detail' post.id %}" class="card-link" style="float: right">Details</a>
+                <a href="{% url 'boards:delete_post' post.id %}" class="card-link mr-2 text-danger" style="float: right">Delete</a>
+                <a href="{% url 'boards:detail' post.id %}" class="card-link mr-2" style="float: right">Details</a>
             </div>
             <div class="container">
                 <p class="card-text" style="margin-top: 20px; margin-right: 15px; margin-left : 20px; margin-bottom: 0px">{{ post.comment }}</p>
