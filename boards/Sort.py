@@ -34,7 +34,18 @@ class Sort:
 			start += 1
 
 	def selection_event_date_ascending(self, post_list):
-		pass
+		i = 0
+		while i < len(post_list):
+			min_index = i
+
+			j = i+1
+			while (j < len(post_list)):
+				if post_list[j].event_date < post_list[min_index].event_date:
+					min_index = j
+				j += 1
+
+			post_list[i], post_list[min_index] = post_list[min_index], post_list[i]
+			i += 1
 
 	def insertion_event_date_descending(self, post_list):
 		pass

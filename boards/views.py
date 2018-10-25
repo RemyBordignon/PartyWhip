@@ -44,7 +44,7 @@ def index(request):
             elif sort_by == 'budget_descending':
                 sort.bubble_budget_descending(post_list)
             elif sort_by == 'event_date_ascending':
-                post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('event_date')
+               sort.selection_event_date_ascending(post_list)
             elif sort_by == 'event_date_descending':
                 post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-event_date')
             elif sort_by == 'this_week':
