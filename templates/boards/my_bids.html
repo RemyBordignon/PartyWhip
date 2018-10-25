@@ -21,7 +21,7 @@ My Bids
                     <p id="status-assigned">{{ bid.post.status }}</p>
                 {% endif %}
             </strong>
-            <a href="{% url 'boards:delete_bid' bid.post.id %}" class="card-link mr-2 text-danger" style="float: right">Delete</a>
+            <a href="{% url 'boards:delete_bid' bid.id %}" class="card-link mr-2 text-danger" style="float: right">Delete</a>
             <a href="{% url 'boards:detail' bid.post.id %}" class="card-link mr-2" style="float: right">Details</a>
         </div>
         <div class="card-body">
