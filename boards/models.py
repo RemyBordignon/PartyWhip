@@ -11,9 +11,9 @@ from django.utils import timezone
 class Post(models.Model):
     user = models.CharField(max_length=200)
     title = models.CharField(max_length=200, blank=False, verbose_name="Post Title")
-    pub_date = models.DateTimeField('date published')
-    end_date = models.DateTimeField('end date')
-    event_date = models.DateTimeField('event date')
+    pub_date = models.DateTimeField('Date Published')
+    end_date = models.DateTimeField('Bidding Close Date')
+    event_date = models.DateTimeField('Event Date')
     budget = models.IntegerField(blank=False, verbose_name="Maximum Budget")
     location = models.CharField(max_length=100, verbose_name="Location")
     comment = models.CharField(max_length=300, verbose_name="Bid Comments")
