@@ -7,6 +7,8 @@ from django.db import models
 from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
 from django.utils import timezone
 
+from boards.date import Date
+
 
 class Post(models.Model):
     user = models.CharField(max_length=200)
@@ -26,10 +28,14 @@ class Post(models.Model):
 
     def clean_fields(self, exclude=None):
         super().clean_fields(exclude=exclude)
-        print(self.end_date)
-        if self.end_date >= self.event_date:
+
+        end_date = Date(self.end_date.day, self.end_date.month, self.end_date.year)
+        event_date = Date(self.event_date.day, self.event_date.month, self.event_date.year)
+        curr_date = Date(timezone.now().day, timezone.now().month, timezone.now().year)
+
+        if end_date.greaterThan(event_date):
             raise ValidationError("Invalid Date: the Event Date must be after the End Date")
-        if self.end_date <= timezone.now() or self.event_date <= timezone.now():
+        if not end_date.greaterThan(curr_date) or not event_date.greaterThan(curr_date):
             raise ValidationError("Invalid Date: the date you have chosen has passed")
 
 
