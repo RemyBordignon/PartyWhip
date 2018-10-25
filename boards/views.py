@@ -11,7 +11,7 @@ from django.db.models import Q
 # Create your views here.
 from boards.forms import PostForm, BidForm, OptionsForm
 from boards.models import Post, Bid
-
+from boards.Sort import Sort
 
 
 @login_required
@@ -33,15 +33,16 @@ def index(request):
             if min_value is not "" and max_value is not "" and min_value > max_value:
                 options_form.add_error('max_value', "Enter Valid Budget Range")
 
-        # SORT?
         if sort_by is not None:
-            # WE WILL INSERT DAFNY SORTS HERE
+            sort = Sort()
+            post_list = Post.objects.exclude(end_date__lte=timezone.localtime())
+            # DAFNY SORTS HERE
             if sort_by == 'most_recent':
                 post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
             elif sort_by == 'budget_ascending':
                 post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('budget')
             elif sort_by == 'budget_descending':
-                post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-budget')
+                sort.bubble_budget_descending(post_list)
             elif sort_by == 'event_date_ascending':
                 post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('event_date')
             elif sort_by == 'event_date_descending':
