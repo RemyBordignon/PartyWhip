@@ -12,5 +12,6 @@ urlpatterns = [
     path('my_bids/', views.my_bids, name='my_bids'),
     path('winner_selected/<int:bid_id>/', views.set_winner_selected, name='winner_selected'),
     path('search/', views.search, name='search'),
-    path('delete_post/<int:post_id>/', views.delete_post, name='delete_post')
+    path('delete_post/<int:post_id>/', views.delete_post, name='delete_post'),
+    path('delete_bid/<int:bid_id>/', views.delete_bid, name='delete_bid')
 ]

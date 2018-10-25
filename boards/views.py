@@ -167,4 +167,13 @@ def delete_post(request, post_id):
     post_list = Post.objects.filter(user=request.user).order_by('-pub_date')
     return render(request, 'boards/my_posts.html', {'post_list': post_list})
 
+@login_required
+def delete_bid(request, bid_id):
+    bid = Bid.objects.get(pk=bid_id)
+    bid.delete()
+
+    bid_list = Bid.objects.filter(user=request.user).order_by('-post__pub_date')
+    return render(request, 'boards/my_bids.html', {'bid_list': bid_list})
+
+
 
