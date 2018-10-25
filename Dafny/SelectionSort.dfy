@@ -1,7 +1,7 @@
 predicate Sorted(a:array<int>, low:int, high:int)
 	reads a
 {
-	low >= 0 && high <= a.Length &&
+	0 <= low <= high <= a.Length &&
 	forall i,j :: low <= i < j < high ==> a[i] <= a[j]
 }
 
