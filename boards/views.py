@@ -22,7 +22,6 @@ def index(request):
         options_form = OptionsForm()
         post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
     else:
-        print(request.GET.get('sort_option'))
         sort_by = request.GET.get('sort_option')
         min_value = request.GET.get('min_value')
         max_value = request.GET.get('max_value')
@@ -30,9 +29,9 @@ def index(request):
         if sort_by is not None and (min_value is not None or max_value is not None):
             options_form.add_error('sort_option', "Select one sorting mechanism")
 
-
-        if min_value is not None and max_value is not None and min_value > max_value:
-            options_form.add_error('max_value', "Enter Valid Budget Range")
+        if min_value is not None and max_value is not None:
+            if min_value is not "" and max_value is not "" and min_value > max_value:
+                options_form.add_error('max_value', "Enter Valid Budget Range")
 
         # SORT?
         if sort_by is not None:
@@ -59,12 +58,12 @@ def index(request):
                                                     event_date__gte=datetime.datetime.now())
             else:
                 post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
-        elif min_value is not None and max_value is not None and min_value < max_value:
+        elif min_value is not None and min_value is not "" and max_value is not None and max_value is not "" and min_value < max_value:
             post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).filter(budget__gte=min_value,
                                             budget__lte=max_value)
-        elif min_value is not None and max_value is None:
+        elif min_value is not None and min_value is not "" and (max_value is None or max_value is ""):
             post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).filter(budget__gte=min_value)
-        elif max_value is not None and min_value is None:
+        elif max_value is not None and max_value is not "" and (min_value is None or min_value is ""):
             post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).filter(budget__lte=max_value)
         else:
             post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
@@ -118,7 +117,6 @@ def create_post(request):
 @login_required
 def create_bid(request, post_id):
     p = get_object_or_404(Post, pk=post_id)
-    print(p)
     if request.method == "POST":
         bid = Bid(user=request.user, post=p)
         form = BidForm(instance=bid, data=request.POST)
