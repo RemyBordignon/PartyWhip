@@ -85,18 +85,11 @@ def detail(request, post_id):
         post.status = "CLOSED"
     if post.winner_selected == True:
         post.status = "ASSIGNED"
-
-
-    user_already_bidded = False
-    for bid in Bid.objects.filter(user=request.user,post=post):
-        if bid.user == request.user.username:
-            user_already_bidded = True
-
+        
     post.save()
     context = {
         'post': post,
-        'user': request.user,
-        'user_already_bidded': user_already_bidded
+        'user': request.user
     }
 
     return render(request, 'boards/detail.html', context)
