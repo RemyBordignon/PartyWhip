@@ -19,6 +19,7 @@ class Post(models.Model):
     comment = models.CharField(max_length=300, verbose_name="Bid Comments")
     winner_selected = models.BooleanField(default=False)
     status = models.CharField(max_length=10, default="OPEN")
+    winning_bid = models.IntegerField(default=-1)
 
     def __str__(self):
         return self.title

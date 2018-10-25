@@ -160,6 +160,7 @@ def set_winner_selected(request, bid_id):
     b = get_object_or_404(Bid, pk=bid_id)
     b.post.winner_selected = True
     b.post.status = "ASSIGNED"
+    b.post.winning_bid = b.id
     b.post.save()
     b.save()
     context = {

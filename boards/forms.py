@@ -28,7 +28,7 @@ class PostForm(ModelForm):
 
         }
 
-        exclude = ('user', 'pub_date', 'winner_selected', 'status')
+        exclude = ('user', 'pub_date', 'winner_selected', 'status', 'winning_bid',)
 
 
 class BidForm(ModelForm):
