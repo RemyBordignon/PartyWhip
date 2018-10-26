@@ -35,12 +35,10 @@ def unique_username(usernames, new_username):
     unique = True
 
     while i < len(usernames):
-        identical = (usernames[i].username == new_username)
+        identical = (usernames[i] == new_username)
 
         if identical:
             unique = False
-        else:
-            print(usernames[i], new_username[0])
         
         i += 1
     return unique
