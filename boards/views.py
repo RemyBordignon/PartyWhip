@@ -34,11 +34,11 @@ def index(request):
                 options_form.add_error('max_value', "Enter Valid Budget Range")
 
         if sort_by is not None:
+            # DAFNY SORTS HERE
             sort = Sort()
             post_list = list(Post.objects.exclude(end_date__lte=timezone.localtime()))
-            # DAFNY SORTS HERE
             if sort_by == 'most_recent':
-                post_list = Post.objects.exclude(end_date__lte=timezone.localtime()).order_by('-pub_date')
+                sort.insertion_pub_date_descending(post_list)
             elif sort_by == 'budget_ascending':
                 sort.cocktail_budget_ascending(post_list)
             elif sort_by == 'budget_descending':

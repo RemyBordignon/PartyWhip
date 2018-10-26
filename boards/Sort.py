@@ -60,3 +60,17 @@ class Sort:
 
 			post_list[prev + 1] = post
 			curr += 1
+
+	def insertion_pub_date_descending(self, post_list):
+		curr = 1
+		while curr < len(post_list):
+			post = post_list[curr]
+			prev = curr - 1
+			post_list[curr] = post_list[prev]
+
+			while prev >= 0 and post_list[prev].pub_date < post.pub_date:
+				post_list[prev + 1] = post_list[prev]
+				prev -= 1
+
+			post_list[prev + 1] = post
+			curr += 1
